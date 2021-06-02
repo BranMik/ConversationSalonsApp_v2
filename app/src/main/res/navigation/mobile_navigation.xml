@@ -7,26 +7,26 @@
 
     <fragment
         android:id="@+id/nav_invitations"
-        android:name="com.brankomikusic.conversationsalonsapp.InvitationsFragment"
+        android:name="com.brankomikusic.conversationsalonsapp_v2.InvitationsFragment"
         android:label="@string/Invitations"
         tools:layout="@layout/fragment_invitations" />
 
     <fragment
         android:id="@+id/nav_conversations"
-        android:name="com.brankomikusic.conversationsalonsapp.ConversationsFragment"
+        android:name="com.brankomikusic.conversationsalonsapp_v2.ConversationsFragment"
         android:label="@string/Conversations"
         tools:layout="@layout/fragment_conversations_list" />
 
 
     <fragment
         android:id="@+id/nav_articles"
-        android:name="com.brankomikusic.conversationsalonsapp.ArticlesFragment"
+        android:name="com.brankomikusic.conversationsalonsapp_v2.ArticlesFragment"
         android:label="@string/Articles"
         tools:layout="@layout/fragment_articles_list" />
 
     <fragment
         android:id="@+id/nav_recommendations"
-        android:name="com.brankomikusic.conversationsalonsapp.RecommendationsFragment"
+        android:name="com.brankomikusic.conversationsalonsapp_v2.RecommendationsFragment"
         android:label="@string/Recommendations"
         tools:layout="@layout/fragment_recommendations_list" />
 </navigation>
