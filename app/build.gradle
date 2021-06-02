@@ -1,0 +1,114 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.brankomikusic.conversationsalonsapp"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("C:/Users/bmiku/OneDrive/_DCU/SDA/br_sda_keystore2.jks")
+            storePassword "asvamedha"
+            keyAlias "key0"
+            keyPassword "asvamedha"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding = true // Enable View binding for simple access
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.4.0-alpha02'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.navigation:navigation-fragment:2.3.4'
+    implementation 'androidx.navigation:navigation-ui:2.3.4'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //Glide transformations
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
+
+    // WORKER
+    def work_version = "2.5.0"
+    // Java
+    implementation "androidx.work:work-runtime:$work_version"
+
+    //VOLLEY
+    implementation 'com.android.volley:volley:1.2.0'
+
+    //FIREBASE
+    // Import the Firebase BoM (see: https://firebase.google.com/docs/android/learn-more#bom)
+    implementation platform('com.google.firebase:firebase-bom:26.8.0')
+    // ----------------
+    // Firebase Authentication (Java)
+    // Temporarily pinned to 20.0.1 to avoid https://youtrack.jetbrains.com/issue/KT-44375 ???
+    //implementation 'com.google.firebase:firebase-auth:20.0.1'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    // ----------------
+    // Firebase UI
+    // Used in FirebaseUIActivity.
+    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
+    //implementation 'com.firebaseui:firebase-ui-auth'
+    // ----------------
+    // Firebase Analytics
+    implementation 'com.google.firebase:firebase-analytics'
+    // ----------------
+    // Firebase Cloud Messaging (Java)
+    implementation 'com.google.firebase:firebase-messaging'
+    // -------------------
+    // Dependency for the Cloud Storage library
+    implementation 'com.google.firebase:firebase-storage'
+    // -------------------
+    // Dependency for the Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:6.1.0'
+    implementation 'com.google.firebase:firebase-firestore'
+
+    // GLIDE
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //ROOM
+    //room persistence library
+    implementation 'android.arch.persistence.room:runtime:' + rootProject.archRoomVersion;
+    annotationProcessor 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
+
+    //RETROFIT
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'org.jsoup:jsoup:1.13.1'
+}

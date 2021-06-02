@@ -1,0 +1,169 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="LoginTheme" parent="FirebaseUI">
+        <item name="colorAccent">@color/brand_color_1</item>
+        <item name="colorError">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/grey_500</item>
+        <item name="android:textColorHint">@color/grey_900</item>
+        <item name="colorControlActivated">@color/grey_100</item>
+        <item name="colorControlHighlight">@color/colorAccent2</item>
+        <item name="android:textColor">@color/grey_900</item>
+        <item name="android:textColorPrimary">@color/grey_100</item>
+        <item name="android:windowBackground">@color/brand_color_2_lighter</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/brand_color_2</item>
+        <item name="android:navigationBarColor">@color/brand_color_2</item>
+        <item name="android:buttonStyle">@style/BrButton</item>
+    </style>
+
+    <style name="FirebaseUI.Text.Link">
+        <item name="android:minHeight">@dimen/fui_min_height_target</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">#0000aa</item>
+    </style>
+
+    <style name="BrButton" parent="FirebaseUI.Button">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17dp</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="Theme.ConversationSalonsApp" parent="Theme.AppCompat.Light">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/brand_color_1</item> <!--BUTTON on main -->
+        <item name="colorPrimaryVariant">@color/brand_color_1_lighter</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/brand_color_2_lighter</item>
+        <item name="colorSecondaryVariant">@color/brand_color_2</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
+
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground" tools:targetApi="l">?attr/colorSecondary</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorSecondaryVariant
+        </item>
+        <item name="toolbarStyle">@style/BrToolbar</item>
+
+        <!--this attribute is to change the theme of the normal FAB-->
+        <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
+        <item name="shapeAppearanceSmallComponent">
+            @style/ShapeAppearance.MaterialComponents.SmallComponent
+        </item>
+        <item name="textAppearanceBody2">@style/ItemText</item>
+        <item name="colorOnSurface">@color/black</item>
+    </style>
+
+    <style name="BrToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background" tools:targetApi="l">?attr/colorSecondaryVariant</item>
+        <item name="titleTextAppearance">@style/TitleTextAppearance</item>
+        <item name="subtitleTextAppearance">@style/SubTitleTextAppearance</item>
+        <item name="android:colorControlNormal">@color/grey_900</item>
+        <item name="elevation">@dimen/toolbar_elevation</item>
+    </style>
+
+    <style name="TitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">25sp</item>
+        <item name="titleTextColor">@color/grey_1000</item>
+    </style>
+
+    <style name="SubTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">20sp</item>
+        <item name="subtitleTextColor">@color/grey_900</item>
+    </style>
+
+    <style name="ItemText" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ItemOverlay">
+        <!-- -->
+    </style>
+
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/myCustomThemeForNormalFab</item>
+        <!--<item name="shapeAppearanceOverlay">@style/customNormalFAB</item>-->
+    </style>
+
+    <style name="myCustomThemeForNormalFab" parent="">
+        <item name="colorSecondary" tools:targetApi="l">@color/brand_color_1_secondary</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="colorOnSecondary">@color/grey_900</item>
+    </style>
+
+    <style name="Theme.ConversationSalonsApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="ToolbarTitleTextBr" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorButtonNormal" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:layout_marginRight">4dp</item>
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="ThemeOverlay.MyLightEditText" parent="ThemeOverlay.AppCompat.Dark" />
+
+    <style name="ThemeOverlay.MyTextDetail" parent="Theme.ConversationSalonsApp">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">5</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ThemeOverlay.FirebaseIcon" parent="Theme.ConversationSalonsApp">
+        <item name="android:layout_marginTop">@dimen/icon_top_margin</item>
+        <item name="android:layout_marginBottom">@dimen/icon_bottom_margin</item>
+    </style>
+
+    <!-- The text on title screen -->
+    <style name="ThemeOverlay.MyTitleText" parent="Theme.ConversationSalonsApp">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="Theme.ConversationSalonsApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ConversationSalonsApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Used for the background -->
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
+    <style name="GoodAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Used for the background -->
+        <item name="android:background" tools:targetApi="l">?attr/colorSecondaryVariant</item>
+    </style>
+
+    <style name="Theme.ConversationSalonsApp.NoActionBar.Fullscreen" parent="Theme.ConversationSalonsApp.NoActionBar">
+        <item name="android:actionBarStyle">
+            @style/Widget.Theme.ConversationSalonsApp.NoActionBar.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="ThemeOverlay.ConversationSalonsApp.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+</resources>

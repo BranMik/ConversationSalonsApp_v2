@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ConversationDetailActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_conversation_detail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:animateLayoutChanges="true"
+        android:background="@color/brand_color_2_lighter_more"
+        android:outlineProvider="bounds"
+        app:contentInsetStart="4dp"
+        app:popupTheme="@style/Theme.ConversationSalonsApp.PopupOverlay" />
+
+    <LinearLayout
+        android:id="@+id/conversation_detail_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:elevation="@dimen/card_elevation"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:background="@color/brand_color_2_lighter_more"
+            android:elevation="5dp"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/container_padding">
+
+            <TextView
+                android:id="@+id/conversation_detail_tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="@dimen/text_margin"
+                android:layout_marginBottom="@dimen/text_margin_small"
+                android:text="@string/title"
+                android:textAlignment="center"
+                android:textAppearance="@style/ToolbarTitleTextBr"
+                android:textColor="@color/brand_color_1" />
+
+            <ScrollView
+                android:id="@+id/conversation_detail_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin_small">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/conversation_detail_tv_intro"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/text_margin"
+                        android:text="@string/intro"
+                        android:textAlignment="center"
+                        android:textColor="@color/grey_700"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/conversation_detail_rv_postslist"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/conversation_detail_fab_newpost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="@drawable/ic_add3"
+            android:clickable="true"
+            android:contentDescription="@string/imgdesc_fab_newpost"
+            android:elevation="@dimen/fab_elevation"
+            android:focusable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_add3" />
+
+    </LinearLayout>
+</LinearLayout>

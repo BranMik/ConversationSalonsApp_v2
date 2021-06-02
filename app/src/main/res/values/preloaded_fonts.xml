@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/aclonica</item>
+        <item>@font/amaranth</item>
+        <item>@font/atma_medium</item>
+        <item>@font/bree_serif</item>
+        <item>@font/capriola</item>
+        <item>@font/chewy</item>
+        <item>@font/crete_round</item>
+        <item>@font/inder</item>
+        <item>@font/karla</item>
+        <item>@font/laila</item>
+        <item>@font/lemon</item>
+        <item>@font/londrina_solid</item>
+        <item>@font/lusitana</item>
+        <item>@font/magra</item>
+        <item>@font/margarine</item>
+        <item>@font/marko_one</item>
+        <item>@font/marmelad</item>
+        <item>@font/montserrat</item>
+        <item>@font/nova_round</item>
+        <item>@font/original_surfer</item>
+        <item>@font/overlock</item>
+        <item>@font/poppins_light</item>
+        <item>@font/quando</item>
+        <item>@font/quattrocento</item>
+        <item>@font/rambla</item>
+        <item>@font/secular_one</item>
+        <item>@font/sofadi_one</item>
+        <item>@font/space_mono</item>
+        <item>@font/trocchi</item>
+        <item>@font/ubuntu_light</item>
+    </array>
+</resources>

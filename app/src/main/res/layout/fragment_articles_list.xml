@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rv_articles_parent"
+    android:name="com.brankomikusic.conversationsalonsapp.ArticlesFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ArticlesFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_articles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:animateLayoutChanges="false"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".ArticlesFragment"
+        tools:listitem="@layout/fragment_articles_item">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <FrameLayout
+        android:id="@+id/fl_articles_updating"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/toolbar_elevation"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/hint_invitation"
+            android:scaleType="fitXY"
+            android:src="@drawable/articles_updating" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/brand_color_2_semi_transp"
+            android:gravity="center_horizontal"
+            android:text="@string/articles_updating_info"
+            android:textColor="@color/brand_color_2_whitish"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+</FrameLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#bb0041</color>
+    <color name="colorAccent2">#EF5350</color>
+
+    <color name="brand_color_2_whitish">#aff8ff</color>
+    <color name="brand_color_2_lighter_more">#79e2ea</color>
+    <color name="brand_color_2_lighter">#59c2ca</color>
+    <color name="brand_color_2_mid_lighter">#69d2da</color>
+    <color name="brand_color_2">#2ea7b0</color>
+    <color name="brand_color_2_darker">#008790</color>
+
+    <color name="brand_color_1">#FF4901</color>
+    <color name="brand_color_1_secondary">#F08F4d</color>
+    <color name="brand_color_1_lighter">#ffe1e0</color>
+    <color name="brand_color_1_darker">#952120</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="grey_100">#efefef</color>
+    <color name="grey_300">#b0b0b0</color>
+    <color name="grey_500">#7E7E7E</color>
+    <color name="grey_900">#444444</color>
+    <color name="grey_1000">#333333</color>
+    <color name="grey_1100">#222222</color>
+    <color name="transparent_color">#00000000</color>
+
+    <color name="brand_color_2_semi_transp">#800e8790
+    </color> <!-- (teal sa example) #018786    / (s pagea) 2ea7b0-->
+    <color name="brand_color_2_darker_semi_transp">#80007780
+    </color> <!-- (teal sa example) #018786    / (s pagea) 2ea7b0-->
+    <color name="brand_color_2_lighter_semi_transp">#8029a2aa</color>
+    <color name="grey_700">#606060</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <!-- (teal sa example) #03DAC5    / (s pagea) c1f3f4  / (FIGMA) 8bd4da-->
+</resources>

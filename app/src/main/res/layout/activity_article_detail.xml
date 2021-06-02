@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brand_color_2_lighter_more"
+    android:orientation="vertical"
+    android:weightSum="40"
+    tools:context=".ArticleDetailActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_article_detail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:animateLayoutChanges="true"
+        android:background="@color/brand_color_2_lighter_more"
+        android:outlineProvider="bounds"
+        app:contentInsetStart="4dp"
+        app:popupTheme="@style/Theme.ConversationSalonsApp.PopupOverlay" />
+
+    <ImageView
+        android:id="@+id/article_detail_imgv_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="16"
+        android:contentDescription="@string/imgdesc_articles"
+        android:scaleType="fitXY"
+        tools:srcCompat="@drawable/articles_updating"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/article_detail_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/text_margin"
+        android:textAlignment="center"
+        android:textAppearance="@style/ToolbarTitleTextBr"
+        android:textColor="@color/brand_color_1"
+        tools:text="Some Title" />
+
+    <TextView
+        android:id="@+id/article_detail_tv_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/text_margin"
+        android:textColor="@color/grey_700"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Author Name" />
+
+    <ScrollView
+        android:id="@+id/article_detail_scrv_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="24"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/article_detail_tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="@string/article_content"
+                android:textAlignment="center"
+                android:textColor="@color/grey_1000"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserSettingsActivity">
+
+    <ImageView
+        android:id="@+id/imgv_settings_goback"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:elevation="@dimen/card_elevation"
+        app:tint="@color/grey_1100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test" />
+
+    <ImageView
+        android:id="@+id/imgv_settings_profilePic"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/brand_color_2_lighter"
+        android:padding="24dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profile_image_placeholder"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_settings_userFullName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textColor="@color/brand_color_1"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgv_settings_profilePic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgv_settings_profilePic"
+        app:layout_constraintTop_toTopOf="@+id/imgv_settings_profilePic"
+        app:layout_constraintVertical_bias="0.31" />
+
+    <TextView
+        android:id="@+id/tv_useremail_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgv_settings_profilePic"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_userFullName" />
+
+    <Button
+        android:id="@+id/b_signOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:text="@string/b_sign_out"
+        android:textSize="18sp"
+        android:theme="@style/ThemeOverlay.MyDarkButton"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/tv_settings_userFullName"
+        app:layout_constraintStart_toStartOf="@+id/tv_settings_userFullName"
+        app:layout_constraintTop_toBottomOf="@+id/tv_useremail_settings" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:text="@string/tv_settings_notifications"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imgv_settings_profilePic"
+        app:layout_constraintStart_toStartOf="@+id/imgv_settings_profilePic"
+        app:layout_constraintTop_toBottomOf="@+id/imgv_settings_profilePic" />
+
+    <Switch
+        android:id="@+id/sw_notif_settings_Articles"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Articles"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Switch
+        android:id="@+id/sw_notif_settings_Conversations"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Conversations"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/sw_notif_settings_Articles" />
+
+    <Switch
+        android:id="@+id/sw_notif_settings_Announcements"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Announcements"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/sw_notif_settings_Conversations" />
+
+    <Switch
+        android:id="@+id/sw_notif_settings_Invitations"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Invitations"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/sw_notif_settings_Announcements" />
+
+    <Switch
+        android:id="@+id/sw_notif_settings_allnewposts"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/all_new_posts"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/sw_notif_settings_recommendations" />
+
+    <Switch
+        android:id="@+id/sw_notif_settings_recommendations"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Recommendations"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/sw_notif_settings_Invitations" />
+
+    <Switch
+        android:id="@+id/sw_adminMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/sw_admin_mode"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/sw_notif_settings_Articles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/b_signOut"
+        app:layout_constraintTop_toBottomOf="@+id/b_signOut"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/admin_mode_hint"
+        app:layout_constraintEnd_toEndOf="@+id/sw_adminMode"
+        app:layout_constraintStart_toStartOf="@+id/sw_adminMode"
+        app:layout_constraintTop_toBottomOf="@+id/sw_adminMode" />
+</androidx.constraintlayout.widget.ConstraintLayout>

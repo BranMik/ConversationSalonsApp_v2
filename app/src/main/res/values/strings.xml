@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">Conversation Salons App</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="firebaseui_login_title_text">Welcome to Conversation Salons</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="desc_firebase_lockup">Firebase logo and name</string>
+    <string name="sign_out">Create New Account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="tv_user_not_confirmed_2">After you click in a link we sent you in confirmation email, you will be able to log in to the app and interact with other members.</string>
+    <string name="tv_user_not_confirmed_3">Thank you for your patience, and see you soon in Conversation Salons.</string>
+    <string name="button_save">save</string>
+    <string name="button_resend_confirmation_email">resend confirmation email</string>
+    <string name="b_createAccount">create new account</string>
+    <string name="et_label_email">Email</string>
+    <string name="et_label_name_surname"><![CDATA[First name & surname]]></string>
+    <string name="et_label_password">New Password</string>
+
+    <string name="message_createuser_success">New user %s was succesfully created.</string>
+    <string name="message_createuser_fail">New user %s could not be created. Try again later.</string>
+
+    <string name="alert_notification_title">Warning!</string>
+    <string name="good_notification_title">Good news!</string>
+
+    <string name="alert_createacc_emailerr">Email entered is in wrong format!</string>
+    <string name="alert_createacc_nameerr">Name is too short.</string>
+    <string name="alert_createacc_passerr">Password is too short!</string>
+    <string name="tv_passerr">Password not strong enough. Use at least 6 characters.</string>
+    <string name="tv_user_not_confirmed_1">Please click on a link we sent you in confirmation email. If you can not find the email, click below button for us to resend it.</string>
+
+    <string name="fcm_message">Conversation Salons</string>
+    <string name="default_notification_channel_name" translatable="true">Consal_DefaultCh</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
+    <string name="menu_item_user">user</string>
+    <string name="tv_settings_notifications">NOTIFICATIONS</string>
+    <string name="Articles">Articles</string>
+    <string name="Conversations">Conversations</string>
+    <string name="Announcements">Announcements</string>
+    <string name="Invitations">Invitations</string>
+    <string name="Recommendations">Recommendations</string>
+    <string name="all_new_posts">ALL New Posts</string>
+
+    <string name="server_client_id_for_google_signin">819675791779-qvnjpe20hma4rrbkqlnouncalc84dmj3.apps.googleusercontent.com</string>
+    <!--800188109035-rg4e0ld740qe0tditq1nssbev3l5evg1.apps.googleusercontent.com</string> -->
+    <string name="b_sign_out">Sign out</string>
+
+    <string name="post">Enter your post here</string>
+    <string name="conversation_title">Conversation topic title</string>
+    <string name="conversation_text">Enter text here</string>
+    <string name="sw_admin_mode">Admin mode</string>
+    <string name="admin_mode_hint">Can create conversation topics</string>
+    <string name="articles_updating_info">ARTICLES ARE STILL BEING UPDATED FROM BLOG. BIG UPDATE ONLY HAPPENS FIRST TIME YOU START THE APP, AND WILL ONLY TAKE A MINUTE.</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_article_detail">FullscreenActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">title</string>
+    <string name="intro">intro</string>
+    <string name="user_name">User name</string>
+    <string name="date">date</string>
+    <string name="post_content">post content</string>
+    <string name="post_author">post author</string>
+    <string name="full_name">Full name</string>
+    <string name="content">content</string>
+    <string name="author">Author</string>
+    <string name="no_empty_fields">"Neither field can be empty !"</string>
+    <string name="no_empty_field">"Field can't be empty !"</string>
+    <string name="comment_posted">"Your comment was posted"</string>
+    <string name="comment__not_posted">" Comment posting was not succesfull ! Try again later."</string>
+    <string name="hint_invitation">Enter new invitation here</string>
+    <string name="invitation_posted">"Your invitation was posted"</string>
+    <string name="invitation__not_posted">" Invitation posting was not succesfull ! Try again later."</string>
+    <string name="recommendation_posted">"Your recommendation was posted"</string>
+    <string name="recommendation__not_posted">" Recommendation posting was not succesfull ! Try again later."</string>
+    <string name="imgdesc_articles">Placeholder for articles</string>
+    <string name="profile_pic">Profile picture</string>
+    <string name="article_content">Article content</string>
+    <string name="imgdesc_fab_newpost">Add new post</string>
+    <string name="cancel">cancel</string>
+    <string name="confirm">confirm</string>
+    <string name="imgdesc_fab_newconversation">new conversation</string>
+</resources>

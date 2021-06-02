@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_conversations">
+
+    <fragment
+        android:id="@+id/nav_invitations"
+        android:name="com.brankomikusic.conversationsalonsapp.InvitationsFragment"
+        android:label="@string/Invitations"
+        tools:layout="@layout/fragment_invitations" />
+
+    <fragment
+        android:id="@+id/nav_conversations"
+        android:name="com.brankomikusic.conversationsalonsapp.ConversationsFragment"
+        android:label="@string/Conversations"
+        tools:layout="@layout/fragment_conversations_list" />
+
+
+    <fragment
+        android:id="@+id/nav_articles"
+        android:name="com.brankomikusic.conversationsalonsapp.ArticlesFragment"
+        android:label="@string/Articles"
+        tools:layout="@layout/fragment_articles_list" />
+
+    <fragment
+        android:id="@+id/nav_recommendations"
+        android:name="com.brankomikusic.conversationsalonsapp.RecommendationsFragment"
+        android:label="@string/Recommendations"
+        tools:layout="@layout/fragment_recommendations_list" />
+</navigation>
