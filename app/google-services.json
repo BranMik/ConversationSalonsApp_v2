@@ -1,78 +1,41 @@
 {
   "project_info": {
-    "project_number": "819675791779",
-    "project_id": "conversation-salons-app-436a9",
-    "storage_bucket": "conversation-salons-app-436a9.appspot.com"
+    "project_number": "789207379945",
+    "project_id": "conversation-salons-app-v2",
+    "storage_bucket": "conversation-salons-app-v2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:819675791779:android:569f698cf6111bb45cda16",
+        "mobilesdk_app_id": "1:789207379945:android:57071e950792bd465da578",
         "android_client_info": {
-          "package_name": "com.brankomikusic.conversationsalonsapp"
+          "package_name": "com.brankomikusic.conversationsalonsapp_v2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "819675791779-724gqijpbbd63r7j0u58d51ham2i4fs2.apps.googleusercontent.com",
+          "client_id": "789207379945-b8fhdudc50bsnhsaaa7kp9p71r82cq2h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.brankomikusic.conversationsalonsapp",
+            "package_name": "com.brankomikusic.conversationsalonsapp_v2",
             "certificate_hash": "3873315cdac4108c2870bba4859946979d4b1d33"
           }
         },
         {
-          "client_id": "819675791779-qvnjpe20hma4rrbkqlnouncalc84dmj3.apps.googleusercontent.com",
+          "client_id": "789207379945-fq6iog60iepnqt3be701rhvmihbusvce.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB3Q6E8pfuBI_I5WSBk0jUvE77p1xf4zac"
+          "current_key": "AIzaSyAOm4fVioaYrDLNGk3JSU0HwXFmp9tfvKw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "819675791779-qvnjpe20hma4rrbkqlnouncalc84dmj3.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:819675791779:android:d491f12753418e205cda16",
-        "android_client_info": {
-          "package_name": "com.brankomikusic.sda_experimental_projectimplementationmodules"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "819675791779-dm50ico6s39t6rr8m4kj3mbmlhjkc77l.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.brankomikusic.sda_experimental_projectimplementationmodules",
-            "certificate_hash": "3873315cdac4108c2870bba4859946979d4b1d33"
-          }
-        },
-        {
-          "client_id": "819675791779-qvnjpe20hma4rrbkqlnouncalc84dmj3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB3Q6E8pfuBI_I5WSBk0jUvE77p1xf4zac"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "819675791779-qvnjpe20hma4rrbkqlnouncalc84dmj3.apps.googleusercontent.com",
+              "client_id": "789207379945-fq6iog60iepnqt3be701rhvmihbusvce.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

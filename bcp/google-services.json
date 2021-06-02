@@ -1,0 +1,84 @@
+{
+  "project_info": {
+    "project_number": "819675791779",
+    "project_id": "conversation-salons-app-436a9",
+    "storage_bucket": "conversation-salons-app-436a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819675791779:android:569f698cf6111bb45cda16",
+        "android_client_info": {
+          "package_name": "com.brankomikusic.conversationsalonsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819675791779-724gqijpbbd63r7j0u58d51ham2i4fs2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brankomikusic.conversationsalonsapp",
+            "certificate_hash": "3873315cdac4108c2870bba4859946979d4b1d33"
+          }
+        },
+        {
+          "client_id": "819675791779-qvnjpe20hma4rrbkqlnouncalc84dmj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3Q6E8pfuBI_I5WSBk0jUvE77p1xf4zac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819675791779-qvnjpe20hma4rrbkqlnouncalc84dmj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819675791779:android:d491f12753418e205cda16",
+        "android_client_info": {
+          "package_name": "com.brankomikusic.sda_experimental_projectimplementationmodules"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819675791779-dm50ico6s39t6rr8m4kj3mbmlhjkc77l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brankomikusic.sda_experimental_projectimplementationmodules",
+            "certificate_hash": "3873315cdac4108c2870bba4859946979d4b1d33"
+          }
+        },
+        {
+          "client_id": "819675791779-qvnjpe20hma4rrbkqlnouncalc84dmj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3Q6E8pfuBI_I5WSBk0jUvE77p1xf4zac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819675791779-qvnjpe20hma4rrbkqlnouncalc84dmj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
