@@ -8,7 +8,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.brankomikusic.conversationsalonsapp_v2"
+        applicationId "com.brankomikusic.conversation_salons_app_v2_1"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -19,7 +19,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("C:/Users/bmiku/OneDrive/_DCU/SDA/br_sda_keystore2.jks")
+            storeFile file("C:/Users/bmiku/OneDrive/_CODE/Android/keystores/br_sda_keystore2.jks")
             storePassword "asvamedha"
             keyAlias "key0"
             keyPassword "asvamedha"
