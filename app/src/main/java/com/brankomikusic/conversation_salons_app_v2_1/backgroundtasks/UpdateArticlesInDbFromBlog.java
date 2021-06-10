@@ -1,12 +1,15 @@
 package com.brankomikusic.conversation_salons_app_v2_1.backgroundtasks;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.brankomikusic.conversation_salons_app_v2_1.MainActivity;
 import com.brankomikusic.conversation_salons_app_v2_1.networking.RetrofitHtmHandler;
 import com.brankomikusic.conversation_salons_app_v2_1.room_sqlite.Article;
 import com.brankomikusic.conversation_salons_app_v2_1.room_sqlite.ArticlesDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -260,17 +263,22 @@ public class UpdateArticlesInDbFromBlog {
             }else if(linkToAnArticle.contains("ie/category/")) { // Matched pattern is not valid article link
                 nextLinkPos = stringToProcess.indexOf("category tag", to);
             }else{ // Link is valid, does not exist in database so Article object will be created and stored for later article scraping
-                ////Log.d(LOG_BR_INFO, "Link for scraping : "+linkToAnArticle);
+
                 final int indxAfterFirstSlash = 10;
                 String title = linkToAnArticle.substring(linkToAnArticle.indexOf("/",indxAfterFirstSlash) + 1,linkToAnArticle.length()-1);
                 title = Character.toUpperCase(title.charAt(0)) + title.substring(1);
                 title = title.replaceAll("-"," ");
                 String imgLink = extractImgLink(from, stringToProcess);
+                String datePublished = extractDatePublished(from,stringToProcess);
+                Log.d(MainActivity.LOG_BR_INFO, "Link for scraping : "+linkToAnArticle);
+                Log.d(MainActivity.LOG_BR_INFO, "date : "+datePublished);
+                Log.d(MainActivity.LOG_BR_INFO," ");
 
                 Article article = new Article();
                 article.setTitle(title);
                 article.setLink(linkToAnArticle);
                 article.setImg_path(imgLink);
+                article.setDate_published(datePublished);
                 listOfArticlesNotInDb.add(article);
 
                 nextLinkPos = stringToProcess.indexOf("gt-image\">", to);
@@ -289,12 +297,43 @@ public class UpdateArticlesInDbFromBlog {
         ////Log.d(LOG_BR_INFO,"");
         return nextPageLink;
     }
+
     private String extractImgLink(int from, String source){
         int offset = 10;
         int startIndx = source.indexOf("data-src=\"",from) + offset;
         int endIndx = source.indexOf("\"",startIndx);
         ////Log.d(LOG_BR_INFO, "IMAGE from : " + from + " , startIndx : " + startIndx + " , " + source.substring(startIndx,endIndx));
         return source.substring(startIndx,endIndx);
+    }
+
+    private String extractDatePublished(int from, String source){
+        final int YEAR_INDEX = 0;
+        final int MONTH_INDEX = 1;
+        final int DAY_INDEX = 2;
+        final ArrayList<String> months = new ArrayList<>(Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
+        final int offset = 21;
+
+        int startIndx = source.indexOf("y2=\"10\"></line></svg>",from) + offset;
+        int endIndx = source.indexOf("<",startIndx);
+        String dateExtracted = source.substring(startIndx,endIndx);
+        dateExtracted = dateExtracted.replace(',',' ');
+        String[] dateParts = new String[3];
+        for(String member:dateExtracted.split(" ")){
+            if(member.length()>0){
+                try{
+                    Integer.parseInt(member);
+                    if(member.length() == 4) dateParts[YEAR_INDEX] = member;
+                    else if(member.length() == 1) dateParts[DAY_INDEX]= "0"+member;
+                    else dateParts[DAY_INDEX] = member;
+                }catch(Exception e){
+                    String month = String.valueOf(months.indexOf(member)+1);
+                    if(month.length()==1) month = "0" + month;
+                    dateParts[MONTH_INDEX] = month;
+                }
+            }
+        }
+
+        return dateParts[YEAR_INDEX] + dateParts[MONTH_INDEX] + dateParts[DAY_INDEX];
     }
 
     private String[] allAuthors = {"Heather Bourke", "Conor McCormick", "Gillian Arigho", "Jyoti Chauhan",

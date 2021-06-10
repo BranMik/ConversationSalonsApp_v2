@@ -21,6 +21,7 @@
         android:backgroundTint="@color/colorAccent2"
         android:backgroundTintMode="src_atop"
         android:contentDescription="@string/cancel"
+        android:foreground="@drawable/br_custom_ripple_effect"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +36,7 @@
         android:backgroundTint="?attr/colorAccent"
         android:backgroundTintMode="src_atop"
         android:contentDescription="@string/confirm"
+        android:foreground="@drawable/br_custom_ripple_effect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

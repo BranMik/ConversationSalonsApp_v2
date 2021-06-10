@@ -19,6 +19,7 @@
         android:background="@drawable/ic_cancel"
         android:backgroundTint="@color/colorAccent2"
         android:backgroundTintMode="src_atop"
+        android:foreground="@drawable/br_custom_ripple_effect"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,6 +33,7 @@
         android:background="@drawable/ic_confirm"
         android:backgroundTint="?attr/colorAccent"
         android:backgroundTintMode="src_atop"
+        android:foreground="@drawable/br_custom_ripple_effect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

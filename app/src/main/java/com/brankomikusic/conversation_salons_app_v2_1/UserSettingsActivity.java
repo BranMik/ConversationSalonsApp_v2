@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,10 +53,27 @@ public class UserSettingsActivity extends AppCompatActivity {
      */
     private void setupListeners(){
 
-        activityUserSettingsBinding.bSignOut.setOnClickListener((view)->{
-                FirebaseLoginWithGmailActivity.getGoogleSignInClient().signOut();
-                FirebaseHandler.getFirebaseAuthInstance().signOut();
+        activityUserSettingsBinding.tvSettingsUserFullName.setOnClickListener((view)->{
+            activityUserSettingsBinding.etSettingsUserFullName.setVisibility(View.VISIBLE);
+            activityUserSettingsBinding.etSettingsUserFullName.setText(activityUserSettingsBinding.tvSettingsUserFullName.getText());
+            activityUserSettingsBinding.tvSettingsUserFullName.setVisibility(View.INVISIBLE);
+            activityUserSettingsBinding.etSettingsUserFullName.requestFocus();
+        });
 
+        activityUserSettingsBinding.etSettingsUserFullName.setOnEditorActionListener((view, actionId, event)->{
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                activityUserSettingsBinding.tvSettingsUserFullName.setVisibility(View.VISIBLE);
+                activityUserSettingsBinding.tvSettingsUserFullName.setText(activityUserSettingsBinding.etSettingsUserFullName.getText());
+                activityUserSettingsBinding.etSettingsUserFullName.setVisibility(View.INVISIBLE);
+                UserObject.changeUserFullNameInFirestore(this, activityUserSettingsBinding.etSettingsUserFullName.getText().toString());
+                return false;
+            }
+            return false;
+        });
+
+        activityUserSettingsBinding.bSignOut.setOnClickListener((view)->{
+                FirebaseLoginWithGmailActivity.getGoogleSignInClient(this).signOut();
+                FirebaseHandler.getFirebaseAuthInstance().signOut();
                 Intent intent = new Intent(this,FirebaseLoginWithGmailActivity.class);
                 startActivity(intent);
         });

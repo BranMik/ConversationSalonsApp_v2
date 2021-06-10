@@ -2,6 +2,7 @@ package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,15 @@ public class RecommendationsViewAdapter extends FirestoreRecyclerAdapter<Recomme
         viewHolder.binding.recommendationItemTvText.setText(recommendationObject.getTitle());
         FirebaseHandler.fillViewWithOtherMemberFullnameUsingUserUID(recommendationObject.getAuthorUID(), viewHolder.binding.recommendationsItemTvFullname);
         FirebaseHandler.fillViewOtherMemberProfilePic(context, recommendationObject.getAuthorUID(),viewHolder.binding.recommendationItemImgv);
+        UserObject userInstance = UserObject.getUserObjectInstance();
+        if(userInstance.getIsAdmin() || recommendationObject.getAuthorUID().equals(userInstance.getUserUID())){
+            viewHolder.binding.delrecommRecommitemB.setVisibility(View.VISIBLE);
+            viewHolder.binding.delrecommRecommitemB.setOnClickListener((view) -> {
+                getSnapshots().getSnapshot(position).getReference().delete();
+            });
+        }else if(viewHolder.binding.delrecommRecommitemB.getVisibility() == View.VISIBLE) {
+            viewHolder.binding.delrecommRecommitemB.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**

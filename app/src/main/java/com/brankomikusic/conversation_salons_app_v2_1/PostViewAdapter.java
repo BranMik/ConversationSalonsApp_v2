@@ -1,14 +1,18 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.brankomikusic.conversation_salons_app_v2_1.databinding.RvPostItemBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+
 
 /**
  * ConversationsViewAdapter for RecyclerView showing list of conversations loaded from Firestore database.It extends
@@ -43,12 +47,22 @@ public class PostViewAdapter extends FirestoreRecyclerAdapter<PostObject, PostVi
      */
     @Override
     protected void onBindViewHolder(@NonNull PostViewHolder holder, int position, @NonNull PostObject post) {
+
         String date = post.getCreationTime().toDate().toString().substring(0,10)+" , "+
                 post.getCreationTime().toDate().toString().substring(29);
         holder.binding.rvitemPostTvContent.setText(post.getText());
         holder.binding.rvitemPostTvDate.setText(date);
         FirebaseHandler.fillViewWithOtherMemberFullnameUsingUserUID(post.getAuthorUID(), holder.binding.rvitemPostTvAuthor);
         FirebaseHandler.fillViewOtherMemberProfilePic(context, post.getAuthorUID(),holder.binding.rvPostItemImgvUserProfilePic);
+        UserObject userInstance = UserObject.getUserObjectInstance();
+        if(userInstance.getIsAdmin() || post.getAuthorUID().equals(userInstance.getUserUID())){
+            holder.binding.delpostPostitemB.setVisibility(View.VISIBLE);
+            holder.binding.delpostPostitemB.setOnClickListener((view) -> {
+                getSnapshots().getSnapshot(position).getReference().delete();
+            });
+        }else if(holder.binding.delpostPostitemB.getVisibility() == View.VISIBLE) {
+            holder.binding.delpostPostitemB.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**

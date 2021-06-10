@@ -90,4 +90,7 @@
     <string name="cancel">cancel</string>
     <string name="confirm">confirm</string>
     <string name="imgdesc_fab_newconversation">new conversation</string>
+    <string name="hint_fullname">Enter your full name</string>
+
+    <string name="update_name_failed">Updating name was unsuccessful. Try again later.</string>
 </resources>

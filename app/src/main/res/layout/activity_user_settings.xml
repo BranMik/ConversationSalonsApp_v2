@@ -169,4 +169,20 @@
         app:layout_constraintEnd_toEndOf="@+id/sw_adminMode"
         app:layout_constraintStart_toStartOf="@+id/sw_adminMode"
         app:layout_constraintTop_toBottomOf="@+id/sw_adminMode" />
+
+    <EditText
+        android:id="@+id/et_settings_userFullName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:capitalize="words"
+        android:ems="12"
+        android:hint="@string/hint_fullname"
+        android:inputType="textPersonName"
+        android:singleLine="true"
+        android:visibility="invisible"
+        android:imeOptions="actionDone"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_settings_userFullName"
+        app:layout_constraintEnd_toEndOf="@+id/tv_settings_userFullName"
+        app:layout_constraintStart_toStartOf="@+id/tv_settings_userFullName"
+        app:layout_constraintTop_toTopOf="@+id/tv_settings_userFullName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

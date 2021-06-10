@@ -1,5 +1,6 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +52,7 @@ public class FirebaseLoginWithGmailActivity extends AppCompatActivity {
         binding = ActivityFirebaseLoginUiBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setupGoogleSignIn();
+        setupGoogleSignIn(this);
         setupListeners();
     }
 
@@ -81,14 +82,14 @@ public class FirebaseLoginWithGmailActivity extends AppCompatActivity {
     /**
      * Method for seting up Google sign in action.
      */
-    private void setupGoogleSignIn(){
+    private static void setupGoogleSignIn(Context context){
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.server_client_id_for_google_signin))
+                .requestIdToken(context.getString(R.string.server_client_id_for_google_signin))
                 .requestEmail()
                 .build();
 
-         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+         mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
     }
 
     /**
@@ -110,27 +111,22 @@ public class FirebaseLoginWithGmailActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(MainActivity.LOG_BR_INFO,"ON ACTIVITY RESULT");
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             if(resultCode == RESULT_OK) {
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                 try {
                     // Google Sign In was successful, authenticate with Firebase
-                    Log.d(MainActivity.LOG_BR_INFO,"SIGN IN OK 1");
                     GoogleSignInAccount account = task.getResult(ApiException.class);
                     firebaseAuthWithGoogle(account.getIdToken());
-                    Log.d(MainActivity.LOG_BR_INFO,"SIGN IN OK 2 ");
                 } catch (ApiException e) {
                     // Google Sign In failed, update UI appropriately
                     Log.w(MainActivity.LOG_BR_ERROR, "Google sign in failed", e);
                 }
             }else if(resultCode == RESULT_CANCELED){
-                Log.d(MainActivity.LOG_BR_INFO,"RESULT CANCELED data = "+data);
                 if(data != null && data.getDataString() != null)
                     Log.d(MainActivity.LOG_BR_INFO, data.getDataString());
             }else{
-                Log.d(MainActivity.LOG_BR_INFO,"RESULT "+resultCode);
                 if(data != null && data.getDataString() != null)
                     Log.d(MainActivity.LOG_BR_INFO, data.getDataString());
             }
@@ -142,7 +138,6 @@ public class FirebaseLoginWithGmailActivity extends AppCompatActivity {
      * @param idToken The string representing Google sign in idToken
      */
     private void firebaseAuthWithGoogle(String idToken) {
-        Log.d(MainActivity.LOG_BR_INFO,"FIREBASE AUTH 1");
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         FirebaseHandler.getFirebaseAuthInstance().signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -150,14 +145,12 @@ public class FirebaseLoginWithGmailActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(MainActivity.LOG_BR_INFO,"FIREBASE AUTH ON COMPLETE SUCCESS");
                             FirebaseUser user = FirebaseHandler.getFirebaseAuthInstance().getCurrentUser();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.d(MainActivity.LOG_BR_INFO,"FIREBASE AUTH ON COMPLETE FAILED");
                             Toast.makeText(FirebaseLoginWithGmailActivity.this,"Authentication process failed!! Try again or contact the administrator.",Toast.LENGTH_LONG).show();
-                            getGoogleSignInClient().signOut();
+                            mGoogleSignInClient.signOut();
                             FirebaseHandler.getFirebaseAuthInstance().signOut();
                             Log.w(MainActivity.LOG_BR_INFO, "signInWithCredential:failure", task.getException());
                             updateUI(null);
@@ -173,11 +166,9 @@ public class FirebaseLoginWithGmailActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             // Signed in
-            Log.d(MainActivity.LOG_BR_INFO,"UPD USER !Null");
             binding.signInButton.setVisibility(View.INVISIBLE);
             checkIfMemberProfileExists(user);
         } else {
-            Log.d(MainActivity.LOG_BR_INFO,"UPD USER Null");
             // Signed out
             //Toast.makeText(this,"Authentication process failed!! Try again or contact the administrator.",Toast.LENGTH_LONG).show();
             binding.signInButton.setVisibility(View.VISIBLE);
@@ -198,7 +189,6 @@ public class FirebaseLoginWithGmailActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
-                            Log.d(MainActivity.LOG_BR_INFO,"User exist");
                             UserObject.createUserObjectInstanceForExistingMember(task.getResult().getDocuments().get(0));
                             startActivityForConfirmed();
                         }else{
@@ -223,7 +213,10 @@ public class FirebaseLoginWithGmailActivity extends AppCompatActivity {
      * Getter for the GoogleSignInClient object
      * @return GoogleSignInClient object.
      */
-    public static GoogleSignInClient getGoogleSignInClient(){
+    public static GoogleSignInClient getGoogleSignInClient(Context context){
+        if(mGoogleSignInClient == null){
+            setupGoogleSignIn(context);
+        }
         return mGoogleSignInClient;
     }
 }

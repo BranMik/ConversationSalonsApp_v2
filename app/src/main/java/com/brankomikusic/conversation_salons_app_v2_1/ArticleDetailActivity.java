@@ -41,11 +41,13 @@ public class ArticleDetailActivity extends AppCompatActivity {
         TextView tv_title = findViewById(R.id.article_detail_tv_title);
         TextView tv_author = findViewById(R.id.article_detail_tv_author);
         TextView tv_content = findViewById(R.id.article_detail_tv_content);
+        TextView tv_date = findViewById(R.id.article_detail_tv_date);
         ScrollView scr_view = findViewById(R.id.article_detail_scrv_content);
 
         tv_title.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_TITLE,""));
         tv_author.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_AUTHOR,""));
         tv_content.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_CONTENT,""));
+        tv_date.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_DATE,""));
         MyUtils.showImageFromUri(this,articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_IMGPATH,""),imageView);
         scr_view.fullScroll(View.FOCUS_UP);
 

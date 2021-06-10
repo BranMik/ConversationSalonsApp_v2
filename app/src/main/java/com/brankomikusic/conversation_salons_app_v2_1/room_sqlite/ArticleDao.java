@@ -13,20 +13,17 @@ import java.util.List;
 @Dao
 public interface ArticleDao {
 
-    @Query("SELECT * FROM Article")
+    @Query("SELECT * FROM Article order by date_published DESC")
     List<Article> getAll();
 
     @Query("SELECT * FROM Article where title LIKE  :titleVar")
     Article findByName(String titleVar);
 
-    @Query("SELECT link FROM Article where articleId ==  (SELECT max(articleId) FROM Article)")
-    String mostRecentArticleLink();
-
     @Query("SELECT COUNT(*) from Article")
     int countArticles();
 
-    @Query("SELECT max(articleOrder) from Article")
-    int maxOrderNum();
+    @Query("SELECT * from Article order by date_published DESC LIMIT :howMany")
+    List<Article> getRecentArticles(int howMany);
 
     @Query("SELECT link FROM Article where link LIKE  :linkVar")
     String findByLink(String linkVar);
@@ -35,6 +32,6 @@ public interface ArticleDao {
     void insertAll(Article... articles);
 
     @Delete
-    void delete(Article country);
+    void delete(Article article);
 }
 

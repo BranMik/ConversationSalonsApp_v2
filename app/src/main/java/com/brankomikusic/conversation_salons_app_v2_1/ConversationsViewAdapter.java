@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentConversationsItemBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+
+import java.util.Random;
 
 /**
  * ConversationsViewAdapter for RecyclerView showing list of conversations loaded from Firestore database.It extends
@@ -27,6 +32,7 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
     public static String BUNDLE_KEY_CONVERSATION_INTRO = "INTRO";
     public static String INTENT_EXTRA_KEY_BUNDLE = "BUNDLE";
     private Context context;
+    Random rnd ;
 
     /**
      * Creates a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -38,6 +44,7 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
     public ConversationsViewAdapter(@NonNull FirestoreRecyclerOptions<ConversationObject> options, Context ctx) {
         super(options);
         this.context = ctx;
+        rnd = new Random();
     }
 
     /**
@@ -54,7 +61,13 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
         viewHolder.binding.rvitemConversationlistTvDate.setText(datePosted);
         viewHolder.binding.rvitemConversationlistTvTitle.setText(conversationObject.getTitle());
         String documentId = getSnapshots().getSnapshot(position).getId();
-        viewHolder.binding.getRoot().setOnClickListener((view)->{
+
+        int rnd_num = rnd.nextInt(5)*3+2;
+        Animation an = AnimationUtils.loadAnimation(context,R.anim.anim_wobble);
+        an.setRepeatCount(rnd_num);
+        viewHolder.binding.getRoot().startAnimation(an);
+
+        viewHolder.binding.cardView2.setOnClickListener((view)->{
             Intent intent = new Intent(context, ConversationDetailActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString(BUNDLE_KEY_CONVERSATION_DOCUMENTID,documentId);
@@ -63,6 +76,15 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
             intent.putExtra(INTENT_EXTRA_KEY_BUNDLE,bundle);
             context.startActivity(intent);
         });
+        UserObject userInstance = UserObject.getUserObjectInstance();
+        if(userInstance.getIsAdmin()){
+            viewHolder.binding.delconversConverstemB.setVisibility(View.VISIBLE);
+            viewHolder.binding.delconversConverstemB.setOnClickListener((view) -> {
+                getSnapshots().getSnapshot(position).getReference().delete();
+            });
+        }else if(viewHolder.binding.delconversConverstemB.getVisibility() == View.VISIBLE) {
+            viewHolder.binding.delconversConverstemB.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**

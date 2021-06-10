@@ -25,8 +25,8 @@ public class Article {
     @PrimaryKey(autoGenerate = true)
     private int articleId;
 
-    @ColumnInfo(name = "articleOrder")
-    private int articleOrder;
+    @ColumnInfo(name = "date_published")
+    private String date_published;
 
     @ColumnInfo(name = "title")
     private String title;
@@ -92,12 +92,17 @@ public class Article {
         this.articleId = articleId;
     }
 
-    public int getArticleOrder() {
-        return articleOrder;
+    public void setDate_published(String date_published) {
+        this.date_published = date_published;
     }
 
-    public void setArticleOrder(int articleOrder) {
-        this.articleOrder = articleOrder;
+    public String getDate_published() {
+        return date_published;
+    }
+
+    public String getDate_formated() {
+        String date_formated = date_published.substring(6,8)+"/"+date_published.substring(4,6)+"/"+date_published.substring(0,4);
+        return date_formated;
     }
 
     public String getTitle() {

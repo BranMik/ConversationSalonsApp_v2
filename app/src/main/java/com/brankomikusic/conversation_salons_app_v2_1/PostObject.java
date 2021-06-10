@@ -8,6 +8,7 @@ import com.google.firebase.Timestamp;
  * @author Branko Mikusic
  */
 public class PostObject {
+    private String postId;
     private String authorUID;
     private Timestamp creationTime;
     private String text;

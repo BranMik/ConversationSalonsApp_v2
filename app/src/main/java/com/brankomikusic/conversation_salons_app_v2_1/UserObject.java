@@ -1,6 +1,8 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -64,7 +66,7 @@ public class UserObject {
     }
 
     /**
-     * Constructor for creating user object with data from fetched from Firestore members collection.
+     * Constructor for creating user object with data fetched from Firestore members collection.
      *
      * @param documentSnapshot DocumentSnapshot of member document from Firestore database
      */
@@ -122,7 +124,7 @@ public class UserObject {
     }
 
     public void setFullName(String fullName) {
-        fullName = fullName;
+        this.fullName = fullName;
     }
 
     public void setEmail(String email){
@@ -135,6 +137,23 @@ public class UserObject {
 
     public void setIsAdmin(boolean isAdmin){
         this.isAdmin = isAdmin;
+    }
+
+    public static void changeUserFullNameInFirestore(Context context, String newName){
+        FirebaseHandler.getMembersCollectionReference().document(UserObject.userDocumentId_InMembersCollection).update("fullName", newName)
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    UserObject.changeUserNameLocaly(newName);
+                } else {
+                    Toast.makeText(context, context.getText(R.string.update_name_failed), Toast.LENGTH_LONG).show();
+                }
+            });
+    }
+
+    private static void changeUserNameLocaly(String newName){
+        UserObject instance = UserObject.getUserObjectInstance();
+        instance.setFullName(newName);
+        storeUserObjectDataToSharedPreferences(instance);
     }
 
     /**

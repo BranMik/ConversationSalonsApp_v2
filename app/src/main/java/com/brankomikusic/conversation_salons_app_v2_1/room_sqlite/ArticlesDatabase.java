@@ -14,7 +14,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
  * Class used for managing and instantiating the database
  *
  */
-@Database(entities = {Article.class}, version = 3)
+@Database(entities = {Article.class}, version = 4)
 public abstract class ArticlesDatabase extends RoomDatabase {
 
    /* static final Migration MIGRATION_1_2 = new Migration(1, 2) {

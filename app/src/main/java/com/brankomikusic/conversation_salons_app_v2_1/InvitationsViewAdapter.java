@@ -2,6 +2,7 @@ package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,15 @@ class InvitationsViewAdapter extends FirestoreRecyclerAdapter<InvitationObject, 
         viewHolder.binding.invitationsItemTvText.setText(invitationObject.getTitle());
         FirebaseHandler.fillViewWithOtherMemberFullnameUsingUserUID(invitationObject.getAuthorUID(), viewHolder.binding.invitationsItemTvFullname);
         FirebaseHandler.fillViewOtherMemberProfilePic(context, invitationObject.getAuthorUID(),viewHolder.binding.invitationsItemImgv);
+        UserObject userInstance = UserObject.getUserObjectInstance();
+        if(userInstance.getIsAdmin() || invitationObject.getAuthorUID().equals(userInstance.getUserUID())){
+            viewHolder.binding.delinvitatInvitatitemB.setVisibility(View.VISIBLE);
+            viewHolder.binding.delinvitatInvitatitemB.setOnClickListener((view) -> {
+                getSnapshots().getSnapshot(position).getReference().delete();
+            });
+        }else if(viewHolder.binding.delinvitatInvitatitemB.getVisibility() == View.VISIBLE) {
+            viewHolder.binding.delinvitatInvitatitemB.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**

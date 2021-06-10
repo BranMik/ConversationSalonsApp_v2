@@ -1,6 +1,7 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.Animator;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import com.brankomikusic.conversation_salons_app_v2_1.room_sqlite.Article;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * {@link RecyclerView.Adapter} Adapter for RecyclerView customized to show list of articles scraped from the Conversation Salons
@@ -27,15 +31,17 @@ import java.util.List;
  */
 public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<ArticlesItemRecyclerViewAdapter.ArticleViewHolder> {
 
-    public static String BUNDLE_KEY_AUTHOR= "AUTHOR";
-    public static String BUNDLE_KEY_TITLE= "TITLE";
-    public static String BUNDLE_KEY_IMGPATH = "IMGPATH";
-    public static String BUNDLE_KEY_CONTENT = "CONTENT";
-    public static String INTENT_EXTRA_KEY_BUNDLE = "BUNDLE";
+    public final static String BUNDLE_KEY_AUTHOR= "AUTHOR";
+    public final static String BUNDLE_KEY_TITLE= "TITLE";
+    public final static String BUNDLE_KEY_IMGPATH = "IMGPATH";
+    public final static String BUNDLE_KEY_CONTENT = "CONTENT";
+    public final static String BUNDLE_KEY_DATE = "DATE";
+    public final static String INTENT_EXTRA_KEY_BUNDLE = "BUNDLE";
 
     private final List<Article> mValues;
     public static Animator currentAnimator;
     private Context context;
+    private Random rnd;
 
     /**
      * Constructor sets class variables and shows appropriate View if there are not articles yet to be shown.
@@ -53,6 +59,7 @@ public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<Articl
         }else{
             frameLayout_update.setVisibility(View.GONE);
         }
+        rnd = new Random();
     }
 
     /**
@@ -77,11 +84,18 @@ public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<Articl
     public void onBindViewHolder(final ArticleViewHolder holder, int position) {
         holder.tv_author.setText(mValues.get(position).getAuthor());
         holder.tv_title.setText(mValues.get(position).getTitle());
+        holder.tv_date.setText(mValues.get(position).getDate_formated());
         MyUtils.showImageFromUri(context,mValues.get(position).getImg_path(),holder.image);
+        int rnd_num = rnd.nextInt(5)*3+2;
+        Animation an = AnimationUtils.loadAnimation(context,R.anim.anim_wobble);
+        an.setRepeatCount(rnd_num);
+        holder.card.startAnimation(an);
+
         holder.layout.setOnClickListener((view)->{
             Intent intent = new Intent(holder.itemView.getContext(),ArticleDetailActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString(BUNDLE_KEY_AUTHOR,mValues.get(position).getAuthor());
+            bundle.putString(BUNDLE_KEY_DATE,mValues.get(position).getDate_formated());
             bundle.putString(BUNDLE_KEY_TITLE,mValues.get(position).getTitle());
             bundle.putString(BUNDLE_KEY_IMGPATH,mValues.get(position).getImg_path());
             bundle.putString(BUNDLE_KEY_CONTENT,mValues.get(position).getBody());
@@ -107,7 +121,9 @@ public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<Articl
         ImageView image;
         TextView tv_title;
         TextView tv_author;
+        TextView tv_date;
         LinearLayout layout;
+        CardView card;
 
         /**
          * Views for ArticleViewHolder are being initialized/
@@ -119,6 +135,8 @@ public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<Articl
             tv_author = itemView.findViewById(R.id.rvitem_articles_tv_author);
             tv_title = itemView.findViewById(R.id.rvitem_articles_tv_title);
             layout = itemView.findViewById(R.id.rvitem_articles_innerLinLayout);
+            tv_date = itemView.findViewById(R.id.rvitem_articles_tv_date);
+            card = itemView.findViewById(R.id.rvitem_articles_card);
         }
 
     }
