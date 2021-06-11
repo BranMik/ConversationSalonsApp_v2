@@ -39,6 +39,7 @@ public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<Articl
     public final static String INTENT_EXTRA_KEY_BUNDLE = "BUNDLE";
 
     private final List<Article> mValues;
+    private final int itemViewResource;
     public static Animator currentAnimator;
     private Context context;
     private Random rnd;
@@ -51,9 +52,12 @@ public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<Articl
      * @param frameLayout_update Reference to the layout that is to be shown if items list is empty and there are no
      *                           articles to be shown.
      */
-    public ArticlesItemRecyclerViewAdapter(List<Article> items, Context context, FrameLayout frameLayout_update) {
+    public ArticlesItemRecyclerViewAdapter(List<Article> items, Context context, FrameLayout frameLayout_update,int limit,
+                                           int item_view_resource) {
         this.context = context;
-        mValues = items;
+        this.itemViewResource = item_view_resource;
+        if(limit>0) mValues = items.subList(0,limit) ;
+        else mValues = items;
         if(mValues.size()<=1){
             frameLayout_update.setVisibility(View.VISIBLE);
         }else{
@@ -70,7 +74,7 @@ public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<Articl
      */
     @Override
     public ArticleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_articles_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(itemViewResource, parent, false);
         return new ArticleViewHolder(view);
     }
 
@@ -86,9 +90,10 @@ public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<Articl
         holder.tv_title.setText(mValues.get(position).getTitle());
         holder.tv_date.setText(mValues.get(position).getDate_formated());
         MyUtils.showImageFromUri(context,mValues.get(position).getImg_path(),holder.image);
-        int rnd_num = rnd.nextInt(5)*3+2;
+
         Animation an = AnimationUtils.loadAnimation(context,R.anim.anim_wobble);
-        an.setRepeatCount(rnd_num);
+        int rnd_dur = rnd.nextInt(5)*10+50;
+        an.setDuration(rnd_dur);
         holder.card.startAnimation(an);
 
         holder.layout.setOnClickListener((view)->{

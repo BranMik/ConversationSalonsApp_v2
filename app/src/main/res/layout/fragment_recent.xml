@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recent_ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="40"
+    tools:context=".RecentFragment">
+
+    <LinearLayout
+        android:id="@+id/recent_ll_announcement"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
+
+        <FrameLayout
+            android:id="@+id/fl_articles_updating"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/toolbar_elevation"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/hint_invitation"
+                android:scaleType="fitXY"
+                android:src="@drawable/articles_updating" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/brand_color_2_semi_transp"
+                android:gravity="center_horizontal"
+                android:text="@string/articles_updating_info"
+                android:textColor="@color/brand_color_2_whitish"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recent_rv_articles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            tools:listitem="@layout/rv_articles_item" />
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recent_rv_conversations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recent_rv_invit_recom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10" />
+
+</LinearLayout>

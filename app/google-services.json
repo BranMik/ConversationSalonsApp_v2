@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "789207379945",
+    "project_id": "conversation-salons-app-v2",
+    "storage_bucket": "conversation-salons-app-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789207379945:android:8f93fa66e0cd3deb5da578",
+        "android_client_info": {
+          "package_name": "com.brankomikusic.conversation_salons_app_v2_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789207379945-k362112u6ncgeq0eevdlrekujhn9da07.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brankomikusic.conversation_salons_app_v2_1",
+            "certificate_hash": "3873315cdac4108c2870bba4859946979d4b1d33"
+          }
+        },
+        {
+          "client_id": "789207379945-fq6iog60iepnqt3be701rhvmihbusvce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOm4fVioaYrDLNGk3JSU0HwXFmp9tfvKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789207379945-fq6iog60iepnqt3be701rhvmihbusvce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

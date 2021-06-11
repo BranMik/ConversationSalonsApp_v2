@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentRecommendationItemBinding;
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.RvRecommendationItemBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -63,16 +63,16 @@ public class RecommendationsViewAdapter extends FirestoreRecyclerAdapter<Recomme
     @NonNull
     @Override
     public RecommendationsViewAdapter.RecommendationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RecommendationsViewAdapter.RecommendationViewHolder(FragmentRecommendationItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        return new RecommendationsViewAdapter.RecommendationViewHolder(RvRecommendationItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
     }
 
     /**
      * Class for creating Recommendation ViewHolder objects.
      */
     public class RecommendationViewHolder extends RecyclerView.ViewHolder{
-        FragmentRecommendationItemBinding binding;
+        RvRecommendationItemBinding binding;
 
-        RecommendationViewHolder(@NonNull FragmentRecommendationItemBinding binding){
+        RecommendationViewHolder(@NonNull RvRecommendationItemBinding binding){
             super(binding.getRoot());
             this.binding = binding;
         }

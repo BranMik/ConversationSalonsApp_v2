@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_conversations">
+    app:startDestination="@+id/nav_recent">
+
+    <fragment
+        android:id="@+id/nav_recent"
+        android:name="com.brankomikusic.conversation_salons_app_v2_1.RecentFragment"
+        android:label="@string/recent"
+        tools:layout="@layout/fragment_recent" />
 
     <fragment
         android:id="@+id/nav_invitations"

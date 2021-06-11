@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentInvitationItemBinding;
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.RvInvitationItemBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -62,16 +62,16 @@ class InvitationsViewAdapter extends FirestoreRecyclerAdapter<InvitationObject, 
     @NonNull
     @Override
     public InvitationsViewAdapter.InvitationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new InvitationViewHolder(FragmentInvitationItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        return new InvitationViewHolder(RvInvitationItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
     }
 
     /**
      * Class for creating Invitation ViewHolder objects.
      */
     public class InvitationViewHolder extends RecyclerView.ViewHolder{
-        FragmentInvitationItemBinding binding;
+        RvInvitationItemBinding binding;
 
-        InvitationViewHolder(@NonNull FragmentInvitationItemBinding binding){
+        InvitationViewHolder(@NonNull RvInvitationItemBinding binding){
             super(binding.getRoot());
             this.binding = binding;
         }

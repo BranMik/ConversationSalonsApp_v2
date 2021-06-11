@@ -12,7 +12,7 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentConversationsItemBinding;
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.RvConversationsItemBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -62,9 +62,10 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
         viewHolder.binding.rvitemConversationlistTvTitle.setText(conversationObject.getTitle());
         String documentId = getSnapshots().getSnapshot(position).getId();
 
-        int rnd_num = rnd.nextInt(5)*3+2;
         Animation an = AnimationUtils.loadAnimation(context,R.anim.anim_wobble);
-        an.setRepeatCount(rnd_num);
+        int rnd_dur = rnd.nextInt(5)*10+50;
+        an.setDuration(rnd_dur);
+
         viewHolder.binding.getRoot().startAnimation(an);
 
         viewHolder.binding.cardView2.setOnClickListener((view)->{
@@ -97,16 +98,16 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
     @NonNull
     @Override
     public ConversationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ConversationViewHolder(FragmentConversationsItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        return new ConversationViewHolder(RvConversationsItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
     }
 
     /**
      * Class for creating ConversationViewHolder objects.
      */
     public class ConversationViewHolder extends RecyclerView.ViewHolder{
-        FragmentConversationsItemBinding binding;
+        RvConversationsItemBinding binding;
 
-        ConversationViewHolder(@NonNull FragmentConversationsItemBinding binding){
+        ConversationViewHolder(@NonNull RvConversationsItemBinding binding){
             super(binding.getRoot());
             this.binding = binding;
         }

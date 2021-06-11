@@ -17,7 +17,7 @@
         android:animateLayoutChanges="false"
         app:layoutManager="LinearLayoutManager"
         tools:context=".ArticlesFragment"
-        tools:listitem="@layout/fragment_articles_item">
+        tools:listitem="@layout/rv_articles_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 

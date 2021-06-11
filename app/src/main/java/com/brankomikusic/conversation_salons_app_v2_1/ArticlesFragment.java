@@ -44,7 +44,7 @@ public class ArticlesFragment extends Fragment {
         FragmentArticlesListBinding fragmentArticlesListBinding = FragmentArticlesListBinding.inflate(inflater,container,false);
         fragmentArticlesListBinding.rvArticles.setLayoutManager(new LinearLayoutManager(fragmentArticlesListBinding.getRoot().getContext()));
         fragmentArticlesListBinding.rvArticles.setAdapter(new ArticlesItemRecyclerViewAdapter(Article.ITEMS,getContext(),
-                fragmentArticlesListBinding.flArticlesUpdating));
+                fragmentArticlesListBinding.flArticlesUpdating, -1, R.layout.rv_articles_item));
 
         return fragmentArticlesListBinding.getRoot();
     }

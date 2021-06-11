@@ -9,20 +9,25 @@
             android:icon="@color/transparent_color"
             android:title="" />
         <item
+            android:id="@+id/nav_recent"
+            android:icon="@drawable/ic_menu_recent_2"
+            android:title="@string/recent" />
+        <item
             android:id="@+id/nav_invitations"
-            android:icon="@drawable/ic_menu_invitation"
+            android:icon="@drawable/ic_menu_invitation_3"
             android:title="@string/Invitations" />
         <item
             android:id="@+id/nav_articles"
-            android:icon="@drawable/ic_menu_article"
+            android:icon="@drawable/ic_menu_article_2"
             android:title="@string/Articles" />
         <item
             android:id="@+id/nav_conversations"
-            android:icon="@drawable/ic_menu_conversation"
+            android:icon="@drawable/ic_menu_conversation_2"
             android:title="@string/Conversations" />
         <item
             android:id="@+id/nav_recommendations"
-            android:icon="@drawable/ic_menu_recommendations"
+            android:icon="@drawable/ic_menu_recommendation_2"
             android:title="@string/Recommendations" />
+
     </group>
 </menu>
