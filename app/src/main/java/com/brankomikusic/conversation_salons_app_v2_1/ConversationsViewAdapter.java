@@ -3,16 +3,24 @@ package com.brankomikusic.conversation_salons_app_v2_1;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 import com.brankomikusic.conversation_salons_app_v2_1.databinding.RvConversationsItemBinding;
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.RvRecentConversationItemBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -32,7 +40,9 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
     public static String BUNDLE_KEY_CONVERSATION_INTRO = "INTRO";
     public static String INTENT_EXTRA_KEY_BUNDLE = "BUNDLE";
     private Context context;
-    Random rnd ;
+    private int itemViewResource;
+    private boolean isRecents;
+    private Random rnd ;
 
     /**
      * Creates a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -41,10 +51,14 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
      * @param options FirestoreRecyclerOptions sent to parent constructor.
      * @param ctx Application context value is passed in.
      */
-    public ConversationsViewAdapter(@NonNull FirestoreRecyclerOptions<ConversationObject> options, Context ctx) {
+    public ConversationsViewAdapter(@NonNull FirestoreRecyclerOptions<ConversationObject> options, Context ctx, int itemViewResourceNum
+    , boolean isRecents) {
         super(options);
+        this.itemViewResource = itemViewResourceNum;
         this.context = ctx;
+        this.isRecents = isRecents;
         rnd = new Random();
+        Log.d(MainActivity.LOG_BR_INFO,"Conversations View Adapter created, itemView id = " + itemViewResource);
     }
 
     /**
@@ -58,17 +72,18 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
     @Override
     protected void onBindViewHolder(@NonNull ConversationViewHolder viewHolder, final int position, @NonNull final ConversationObject conversationObject) {
         String datePosted = conversationObject.getCreationTime().toDate().toString().substring(0,10)+" ,"+conversationObject.getCreationTime().toDate().toString().substring(29);
-        viewHolder.binding.rvitemConversationlistTvDate.setText(datePosted);
-        viewHolder.binding.rvitemConversationlistTvTitle.setText(conversationObject.getTitle());
+        viewHolder.tv_date.setText(datePosted);
+        viewHolder.tv_title.setText(conversationObject.getTitle());
+        viewHolder.tv_body.setText(conversationObject.getText());
         String documentId = getSnapshots().getSnapshot(position).getId();
 
         Animation an = AnimationUtils.loadAnimation(context,R.anim.anim_wobble);
         int rnd_dur = rnd.nextInt(5)*10+50;
         an.setDuration(rnd_dur);
 
-        viewHolder.binding.getRoot().startAnimation(an);
+        viewHolder.root.startAnimation(an);
 
-        viewHolder.binding.cardView2.setOnClickListener((view)->{
+        viewHolder.cardView.setOnClickListener((view)->{
             Intent intent = new Intent(context, ConversationDetailActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString(BUNDLE_KEY_CONVERSATION_DOCUMENTID,documentId);
@@ -77,14 +92,16 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
             intent.putExtra(INTENT_EXTRA_KEY_BUNDLE,bundle);
             context.startActivity(intent);
         });
-        UserObject userInstance = UserObject.getUserObjectInstance();
-        if(userInstance.getIsAdmin()){
-            viewHolder.binding.delconversConverstemB.setVisibility(View.VISIBLE);
-            viewHolder.binding.delconversConverstemB.setOnClickListener((view) -> {
-                getSnapshots().getSnapshot(position).getReference().delete();
-            });
-        }else if(viewHolder.binding.delconversConverstemB.getVisibility() == View.VISIBLE) {
-            viewHolder.binding.delconversConverstemB.setVisibility(View.INVISIBLE);
+        if(!isRecents) {
+            UserObject userInstance = UserObject.getUserObjectInstance();
+            if (userInstance.getIsAdmin()) {
+                viewHolder.b_del.setVisibility(View.VISIBLE);
+                viewHolder.b_del.setOnClickListener((view) -> {
+                    getSnapshots().getSnapshot(position).getReference().delete();
+                });
+            } else if (viewHolder.b_del.getVisibility() == View.VISIBLE) {
+                viewHolder.b_del.setVisibility(View.INVISIBLE);
+            }
         }
     }
 
@@ -98,18 +115,32 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
     @NonNull
     @Override
     public ConversationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ConversationViewHolder(RvConversationsItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        Log.d(MainActivity.LOG_BR_INFO,"onCreateViewHolder - 0");
+        View view = LayoutInflater.from(parent.getContext()).inflate(itemViewResource, parent, false);
+        Log.d(MainActivity.LOG_BR_INFO,"onCreateViewHolder - 1");
+        return new ConversationViewHolder(view);
     }
 
     /**
      * Class for creating ConversationViewHolder objects.
      */
     public class ConversationViewHolder extends RecyclerView.ViewHolder{
-        RvConversationsItemBinding binding;
+        ConstraintLayout root;
+        CardView cardView;
+        TextView tv_title;
+        TextView tv_body;
+        TextView tv_date;
+        ImageView b_del;
 
-        ConversationViewHolder(@NonNull RvConversationsItemBinding binding){
-            super(binding.getRoot());
-            this.binding = binding;
+        ConversationViewHolder(@NonNull View itemView){
+            super(itemView);
+            this.root = itemView.findViewById(R.id.rvitem_conversationlist_cl_root);
+            this.cardView = itemView.findViewById(R.id.rvitem_conversationlist_cardView);
+            this.tv_title = itemView.findViewById(R.id.rvitem_conversationlist_tv_title);
+            this.tv_body = itemView.findViewById(R.id.rvitem_conversationlist_tv_body);
+            this.tv_date = itemView.findViewById(R.id.rvitem_conversationlist_tv_date);
+            if(!isRecents)this.b_del = itemView.findViewById(R.id.delconvers_conversitem_b);
         }
+
     }
 }

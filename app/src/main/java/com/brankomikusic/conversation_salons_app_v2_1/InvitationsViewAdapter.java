@@ -1,11 +1,16 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brankomikusic.conversation_salons_app_v2_1.databinding.RvInvitationItemBinding;
@@ -21,9 +26,14 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
  */
 class InvitationsViewAdapter extends FirestoreRecyclerAdapter<InvitationObject, InvitationsViewAdapter.InvitationViewHolder> {
     private Context context;
+    private int itemViewRes;
+    private boolean isRecent;
 
-    public InvitationsViewAdapter(@NonNull FirestoreRecyclerOptions<InvitationObject> options, Context ctx){
+    public InvitationsViewAdapter(@NonNull FirestoreRecyclerOptions<InvitationObject> options, Context ctx, int itemViewResourceNum,
+                                  boolean isRecent){
         super(options);
+        this.itemViewRes = itemViewResourceNum;
+        this.isRecent = isRecent;
         context = ctx;
     }
 
@@ -37,18 +47,24 @@ class InvitationsViewAdapter extends FirestoreRecyclerAdapter<InvitationObject, 
     @Override
     protected void onBindViewHolder(@NonNull InvitationViewHolder viewHolder, final int position, @NonNull final InvitationObject invitationObject) {
         String datePosted = invitationObject.getCreationTime().toDate().toString().substring(0,10)+" ,"+invitationObject.getCreationTime().toDate().toString().substring(29);
-        viewHolder.binding.invitationsItemTvDate.setText(datePosted);
-        viewHolder.binding.invitationsItemTvText.setText(invitationObject.getTitle());
-        FirebaseHandler.fillViewWithOtherMemberFullnameUsingUserUID(invitationObject.getAuthorUID(), viewHolder.binding.invitationsItemTvFullname);
-        FirebaseHandler.fillViewOtherMemberProfilePic(context, invitationObject.getAuthorUID(),viewHolder.binding.invitationsItemImgv);
+        viewHolder.tv_date.setText(datePosted);
+        viewHolder.tv_text.setText(invitationObject.getTitle());
+        FirebaseHandler.fillViewWithOtherMemberFullnameUsingUserUID(invitationObject.getAuthorUID(), viewHolder.tv_author_name);
+        FirebaseHandler.fillViewOtherMemberProfilePic(context, invitationObject.getAuthorUID(),viewHolder.iv_author_pic);
         UserObject userInstance = UserObject.getUserObjectInstance();
-        if(userInstance.getIsAdmin() || invitationObject.getAuthorUID().equals(userInstance.getUserUID())){
-            viewHolder.binding.delinvitatInvitatitemB.setVisibility(View.VISIBLE);
-            viewHolder.binding.delinvitatInvitatitemB.setOnClickListener((view) -> {
-                getSnapshots().getSnapshot(position).getReference().delete();
+        if(!isRecent) {
+            if (userInstance.getIsAdmin() || invitationObject.getAuthorUID().equals(userInstance.getUserUID())) {
+                viewHolder.iv_del.setVisibility(View.VISIBLE);
+                viewHolder.iv_del.setOnClickListener((view) -> {
+                    getSnapshots().getSnapshot(position).getReference().delete();
+                });
+            } else if (viewHolder.iv_del.getVisibility() == View.VISIBLE) {
+                viewHolder.iv_del.setVisibility(View.INVISIBLE);
+            }
+        }else{
+            viewHolder.cv_container.setOnClickListener((view)->{
+                Navigation.findNavController(view).navigate(R.id.action_nav_recent_to_nav_invitations);
             });
-        }else if(viewHolder.binding.delinvitatInvitatitemB.getVisibility() == View.VISIBLE) {
-            viewHolder.binding.delinvitatInvitatitemB.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -62,18 +78,29 @@ class InvitationsViewAdapter extends FirestoreRecyclerAdapter<InvitationObject, 
     @NonNull
     @Override
     public InvitationsViewAdapter.InvitationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new InvitationViewHolder(RvInvitationItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        View view = LayoutInflater.from(parent.getContext()).inflate(itemViewRes, parent, false);
+        return new InvitationsViewAdapter.InvitationViewHolder(view);
     }
 
     /**
      * Class for creating Invitation ViewHolder objects.
      */
     public class InvitationViewHolder extends RecyclerView.ViewHolder{
-        RvInvitationItemBinding binding;
+        TextView tv_date;
+        TextView tv_text;
+        TextView tv_author_name;
+        ImageView iv_author_pic;
+        ImageView iv_del;
+        CardView cv_container;
 
-        InvitationViewHolder(@NonNull RvInvitationItemBinding binding){
-            super(binding.getRoot());
-            this.binding = binding;
+        InvitationViewHolder(@NonNull View itemView){
+            super(itemView);
+            tv_date = itemView.findViewById(R.id.invitations_item_tv_date);
+            tv_text = itemView.findViewById(R.id.invitations_item_tv_text);
+            tv_author_name = itemView.findViewById(R.id.invitations_item_tv_fullname);
+            iv_author_pic = itemView.findViewById(R.id.invitations_item_imgv);
+            cv_container = itemView.findViewById(R.id.invitations_item_cv);
+            if(!isRecent) iv_del = itemView.findViewById(R.id.delinvitat_invitatitem_b);
         }
     }
 }

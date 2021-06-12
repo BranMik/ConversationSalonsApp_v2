@@ -21,7 +21,15 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10">
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_weight="8">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:elevation="@dimen/popup_elevation"
+            android:src="@drawable/ic_menu_article_2" />
 
         <FrameLayout
             android:id="@+id/fl_articles_updating"
@@ -55,20 +63,75 @@
             android:id="@+id/recent_rv_articles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/container_padding"
             android:orientation="horizontal"
             tools:listitem="@layout/rv_articles_item" />
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recent_rv_conversations"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10" />
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_weight="8">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recent_rv_invit_recom"
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:elevation="@dimen/popup_elevation"
+            android:src="@drawable/ic_menu_conversation_2" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recent_rv_conversations"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/container_padding"
+            tools:listitem="@layout/rv_recent_conversation_item" />
+    </FrameLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10" />
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_weight="7">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:elevation="@dimen/popup_elevation"
+            android:src="@drawable/ic_menu_invitation_2" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recent_rv_invitations"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/container_padding"
+            tools:listitem="@layout/rv_recent_invitation_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_weight="7">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:elevation="@dimen/popup_elevation"
+            android:src="@drawable/ic_menu_recommendation_2" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recent_rv_recommendations"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/container_padding"
+            tools:listitem="@layout/rv_recent_recommendation_item" />
+    </FrameLayout>
 
 </LinearLayout>

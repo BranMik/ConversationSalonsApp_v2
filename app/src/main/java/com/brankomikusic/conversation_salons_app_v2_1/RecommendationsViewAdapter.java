@@ -1,11 +1,16 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.brankomikusic.conversation_salons_app_v2_1.databinding.RvRecommendationItemBinding;
@@ -21,11 +26,16 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
  */
 public class RecommendationsViewAdapter extends FirestoreRecyclerAdapter<RecommendationObject, RecommendationsViewAdapter.RecommendationViewHolder> {
 
-    private Context context;
+    private final Context context;
+    private final boolean isRecent;
+    private final int itemViewRes;
 
-    public RecommendationsViewAdapter(@NonNull FirestoreRecyclerOptions<RecommendationObject> options, Context ctx){
+    public RecommendationsViewAdapter(@NonNull FirestoreRecyclerOptions<RecommendationObject> options, Context ctx, int itemViewResourceNum,
+                                      boolean isRecent){
         super(options);
         context = ctx;
+        this.isRecent = isRecent;
+        this.itemViewRes = itemViewResourceNum;
     }
 
     /**
@@ -38,18 +48,24 @@ public class RecommendationsViewAdapter extends FirestoreRecyclerAdapter<Recomme
     @Override
     protected void onBindViewHolder(@NonNull RecommendationViewHolder viewHolder, final int position, @NonNull final RecommendationObject recommendationObject) {
         String datePosted = recommendationObject.getCreationTime().toDate().toString().substring(0,10)+" ,"+recommendationObject.getCreationTime().toDate().toString().substring(29);
-        viewHolder.binding.recommendationItemTvDate.setText(datePosted);
-        viewHolder.binding.recommendationItemTvText.setText(recommendationObject.getTitle());
-        FirebaseHandler.fillViewWithOtherMemberFullnameUsingUserUID(recommendationObject.getAuthorUID(), viewHolder.binding.recommendationsItemTvFullname);
-        FirebaseHandler.fillViewOtherMemberProfilePic(context, recommendationObject.getAuthorUID(),viewHolder.binding.recommendationItemImgv);
+        viewHolder.tv_date.setText(datePosted);
+        viewHolder.tv_text.setText(recommendationObject.getTitle());
+        FirebaseHandler.fillViewWithOtherMemberFullnameUsingUserUID(recommendationObject.getAuthorUID(), viewHolder.tv_authorName);
+        FirebaseHandler.fillViewOtherMemberProfilePic(context, recommendationObject.getAuthorUID(),viewHolder.iv_authorImg);
         UserObject userInstance = UserObject.getUserObjectInstance();
-        if(userInstance.getIsAdmin() || recommendationObject.getAuthorUID().equals(userInstance.getUserUID())){
-            viewHolder.binding.delrecommRecommitemB.setVisibility(View.VISIBLE);
-            viewHolder.binding.delrecommRecommitemB.setOnClickListener((view) -> {
-                getSnapshots().getSnapshot(position).getReference().delete();
+        if(!isRecent) {
+            if (userInstance.getIsAdmin() || recommendationObject.getAuthorUID().equals(userInstance.getUserUID())) {
+                viewHolder.iv_del.setVisibility(View.VISIBLE);
+                viewHolder.iv_del.setOnClickListener((view) -> {
+                    getSnapshots().getSnapshot(position).getReference().delete();
+                });
+            } else if (viewHolder.iv_del.getVisibility() == View.VISIBLE) {
+                viewHolder.iv_del.setVisibility(View.INVISIBLE);
+            }
+        }else{
+            viewHolder.cv_container.setOnClickListener((view)->{
+                Navigation.findNavController(view).navigate(R.id.action_nav_recent_to_nav_recommendations);
             });
-        }else if(viewHolder.binding.delrecommRecommitemB.getVisibility() == View.VISIBLE) {
-            viewHolder.binding.delrecommRecommitemB.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -63,18 +79,30 @@ public class RecommendationsViewAdapter extends FirestoreRecyclerAdapter<Recomme
     @NonNull
     @Override
     public RecommendationsViewAdapter.RecommendationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RecommendationsViewAdapter.RecommendationViewHolder(RvRecommendationItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        View view = LayoutInflater.from(parent.getContext()).inflate(itemViewRes, parent, false);
+        return new RecommendationsViewAdapter.RecommendationViewHolder(view);
+        //return new RecommendationsViewAdapter.RecommendationViewHolder(RvRecommendationItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
     }
 
     /**
      * Class for creating Recommendation ViewHolder objects.
      */
     public class RecommendationViewHolder extends RecyclerView.ViewHolder{
-        RvRecommendationItemBinding binding;
+        TextView tv_authorName;
+        TextView tv_text;
+        TextView tv_date;
+        ImageView iv_authorImg;
+        ImageView iv_del;
+        CardView cv_container;
 
-        RecommendationViewHolder(@NonNull RvRecommendationItemBinding binding){
-            super(binding.getRoot());
-            this.binding = binding;
+        RecommendationViewHolder(@NonNull View itemView){
+            super(itemView);
+            tv_authorName = itemView.findViewById(R.id.recommendations_item_tv_fullname);
+            tv_date = itemView.findViewById(R.id.recommendation_item_tv_date);
+            tv_text  = itemView.findViewById(R.id.recommendation_item_tv_text);
+            iv_authorImg  = itemView.findViewById(R.id.recommendation_item_imgv);
+            cv_container = itemView.findViewById(R.id.recommendation_item_cv);
+            if(!isRecent) iv_del = itemView.findViewById(R.id.delrecomm_recommitem_b);
         }
     }
 }

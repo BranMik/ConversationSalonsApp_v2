@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/rvitem_conversationlist_cl_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/brand_color_2_lighter"
@@ -12,7 +12,7 @@
     android:padding="@dimen/container_padding">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/rvitem_conversationlist_cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -24,7 +24,7 @@
         app:cardBackgroundColor="@color/brand_color_2_mid_lighter"
         app:cardCornerRadius="@dimen/card_cornerrad_small"
         app:cardElevation="@dimen/card_elevation"
-        app:layout_constraintEnd_toStartOf="@+id/delconvers_converstem_b"
+        app:layout_constraintEnd_toStartOf="@+id/delconvers_conversitem_b"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_conversion_absoluteHeight="82dp"
@@ -53,10 +53,24 @@
                 tools:layout_conversion_absoluteWidth="42dp" />
 
             <TextView
+                android:id="@+id/rvitem_conversationlist_tv_body"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/rvitem_conversationlist_tv_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvitem_conversationlist_tv_title"
+                tools:text="@tools:sample/lorem/random" />
+
+            <TextView
                 android:id="@+id/rvitem_conversationlist_tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/date"
@@ -65,7 +79,6 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvitem_conversationlist_tv_title"
                 tools:layout_conversion_absoluteHeight="24dp"
                 tools:layout_conversion_absoluteWidth="35dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -74,7 +87,7 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/delconvers_converstem_b"
+        android:id="@+id/delconvers_conversitem_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -86,9 +99,10 @@
         android:contentDescription="@string/cancel"
         android:foreground="@drawable/br_custom_ripple_effect"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintBottom_toBottomOf="@id/rvitem_conversationlist_cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@id/rvitem_conversationlist_cardView"
+        app:layout_constraintVertical_bias="0.51"
         tools:layout_conversion_absoluteHeight="32dp"
         tools:layout_conversion_absoluteWidth="32dp"
         tools:visibility="visible" />

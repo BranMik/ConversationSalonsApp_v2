@@ -9,7 +9,14 @@
         android:id="@+id/nav_recent"
         android:name="com.brankomikusic.conversation_salons_app_v2_1.RecentFragment"
         android:label="@string/recent"
-        tools:layout="@layout/fragment_recent" />
+        tools:layout="@layout/fragment_recent" >
+        <action
+            android:id="@+id/action_nav_recent_to_nav_invitations"
+            app:destination="@id/nav_invitations" />
+        <action
+            android:id="@+id/action_nav_recent_to_nav_recommendations"
+            app:destination="@id/nav_recommendations" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_invitations"

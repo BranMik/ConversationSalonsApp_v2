@@ -69,7 +69,7 @@ public class RecommendationsFragment extends Fragment {
         FirestoreRecyclerOptions<RecommendationObject> options = new FirestoreRecyclerOptions.Builder<RecommendationObject>()
                 .setQuery(query, RecommendationObject.class)
                 .build();
-        recommendationsViewAdapter = new RecommendationsViewAdapter(options,getContext());
+        recommendationsViewAdapter = new RecommendationsViewAdapter(options,getContext(), R.layout.rv_recommendation_item, false);
         RecyclerView rvRecommendationsList = root.findViewById(R.id.recommendations_list_rv);
         rvRecommendationsList.setHasFixedSize(true);
         rvRecommendationsList.setLayoutManager(new LinearLayoutManager(getContext()));

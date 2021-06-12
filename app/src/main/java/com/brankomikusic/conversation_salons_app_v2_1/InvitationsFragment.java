@@ -67,7 +67,7 @@ public class InvitationsFragment extends Fragment {
         FirestoreRecyclerOptions<InvitationObject> options = new FirestoreRecyclerOptions.Builder<InvitationObject>()
                 .setQuery(query, InvitationObject.class)
                 .build();
-        invitationsViewAdapter = new InvitationsViewAdapter(options,getContext());
+        invitationsViewAdapter = new InvitationsViewAdapter(options,getContext(), R.layout.rv_invitation_item, false);
         RecyclerView rvInvitationList = root.findViewById(R.id.invitations_list_rv);
         rvInvitationList.setHasFixedSize(true);
         rvInvitationList.setLayoutManager(new LinearLayoutManager(getContext()));

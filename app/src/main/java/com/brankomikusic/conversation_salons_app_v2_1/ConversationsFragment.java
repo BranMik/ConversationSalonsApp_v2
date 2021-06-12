@@ -87,7 +87,8 @@ public class ConversationsFragment extends Fragment {
         FirestoreRecyclerOptions<ConversationObject> options = new FirestoreRecyclerOptions.Builder<ConversationObject>()
                 .setQuery(query,ConversationObject.class)
                 .build();
-        conversationsViewAdapter = new ConversationsViewAdapter(options,getContext());
+        Log.d(MainActivity.LOG_BR_INFO,"Size of query : " + String.valueOf(options.getSnapshots().size()));
+        conversationsViewAdapter = new ConversationsViewAdapter(options,getContext(),R.layout.rv_conversations_item, false);
         RecyclerView rvConversationsList = root.findViewById(R.id.rv_conversationslist);
         rvConversationsList.setHasFixedSize(true);
         rvConversationsList.setLayoutManager(new LinearLayoutManager(getContext()));
