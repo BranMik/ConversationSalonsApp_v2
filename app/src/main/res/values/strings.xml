@@ -45,7 +45,7 @@
     <string name="tv_settings_notifications">NOTIFICATIONS</string>
     <string name="Articles">Articles</string>
     <string name="Conversations">Conversations</string>
-    <string name="Announcements">Announcements</string>
+    <string name="Announcement">Announcement</string>
     <string name="Invitations">Invitations</string>
     <string name="Recommendations">Recommendations</string>
     <string name="all_new_posts">ALL New Posts</string>
@@ -93,4 +93,5 @@
     <string name="hint_fullname">Enter your full name</string>
     <string name="recent">Recent</string>
     <string name="update_name_failed">Updating name was unsuccessful. Try again later.</string>
+    <string name="announcement_txt">Text of the announcement</string>
 </resources>

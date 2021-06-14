@@ -6,6 +6,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
+import com.google.firebase.storage.StorageReference;
+
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
@@ -31,9 +33,10 @@ public class MyUtils {
      * @param fallbackResource resource code of the image to be shown if image fetching is unsucessful
      *
      */
-    public static void showImageFromCloudStorage(@NonNull final Context context, String imgPath, @NonNull final ImageView imgView, final Integer fallbackResource){
+    public static void showImageFromCloudStorage(@NonNull final Context context, String imgPath, @NonNull final ImageView imgView,
+                                                 StorageReference storageReference, final Integer fallbackResource){
         try {
-            UserObject.getProfileImagesStorageRef().child(imgPath).getDownloadUrl().addOnSuccessListener(uri -> {
+            storageReference.child(imgPath).getDownloadUrl().addOnSuccessListener(uri -> {
                 Glide.with(context)
                         .load(uri)
                         .transform(new RoundedCornersTransformation(20, 10))

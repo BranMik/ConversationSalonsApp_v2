@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_invitations, R.id.nav_articles,  R.id.nav_conversations, R.id.nav_recommendations,R.id.nav_recent)
+                R.id.nav_invitations, R.id.nav_articles,  R.id.nav_conversations, R.id.nav_recommendations,R.id.nav_recent, R.id.nav_announcement)
                 .setDrawerLayout(activityMainBinding.drawerLayout)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -98,9 +98,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView imgv_profileImgInDrawer = (ImageView) hView.findViewById(R.id.imgv_drawer_profilePic);
         if(UserObject.getUserObjectInstance().getFullName() != null && UserObject.getUserObjectInstance().getFullName().length()>1)
             tv_fullnameInDrawer.setText(UserObject.getUserObjectInstance().getFullName());
-
         MyUtils.showImageFromCloudStorage(context,UserObject.getUserObjectInstance().getProfileImageLocationInCloudStorage(),
-                imgv_profileImgInDrawer,R.drawable.image_empty);
+                imgv_profileImgInDrawer, FirebaseHandler.getProfileImagesStorageReference(), R.drawable.image_empty);
     }
 
     /**

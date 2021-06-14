@@ -7,8 +7,6 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import java.util.HashSet;
 
 /**
@@ -42,7 +40,6 @@ public class UserObject {
     private Boolean isAdmin;
 
     public static String userDocumentId_InMembersCollection;
-    private static StorageReference profileImagesStorageRef;
 
     /**
      * Required empty constructor.
@@ -209,17 +206,6 @@ public class UserObject {
         editor.putBoolean(UserObject.SHPREFS_KEY_IS_ADMIN, userObject.isAdmin);
         editor.putBoolean(UserObject.SHPREFS_KEY_IS_CONFIRMED, userObject.isMembershipConfirmed);
         editor.apply();
-    }
-
-    /**
-     * Returns StorageReference in Cloud Storage for user profile image.
-     * @return
-     */
-    public static StorageReference getProfileImagesStorageRef(){
-        if(profileImagesStorageRef == null){
-            profileImagesStorageRef = FirebaseStorage.getInstance().getReference().child("profileImages");
-        }
-        return profileImagesStorageRef;
     }
 
     /**

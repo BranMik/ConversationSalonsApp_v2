@@ -14,9 +14,12 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 
@@ -29,11 +32,13 @@ public abstract class FirebaseHandler {
 
     private static FirebaseAuth mAuth;
     private static FirebaseFirestore firestore;
+    private static FirebaseStorage storage;
     private static CollectionReference membersCollectionReference;
     private static CollectionReference conversationsCollectionReference;
     private static CollectionReference announcementsCollectionReference;
     private static CollectionReference invitationsCollectionReference;
     private static CollectionReference recommendationsCollectionReference;
+    private static StorageReference profileImagesStorageReference;
 
 
     /**
@@ -56,6 +61,20 @@ public abstract class FirebaseHandler {
             firestore = FirebaseFirestore.getInstance();
         }
         return firestore;
+    }
+
+    public static FirebaseStorage getStorageInstance(){
+        if(storage == null){
+            storage = FirebaseStorage.getInstance();
+        }
+        return storage;
+    }
+
+    public static StorageReference getProfileImagesStorageReference(){
+        if(profileImagesStorageReference == null){
+            profileImagesStorageReference = getStorageInstance().getReference().child("profileImages");
+        }
+        return profileImagesStorageReference;
     }
 
     /**
@@ -245,6 +264,31 @@ public abstract class FirebaseHandler {
                 });
     }
 
+    public static void populateAnnouncementFromFirestore(Context context, TextView announcementTvTitle, TextView announcementTvBodytext, TextView announcementTvDate, ImageView announcementIvImage) {
+        FirebaseHandler.getAnnouncementsCollectionReference()
+                .document("current")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful() && task.getResult()!=null) {
+                            if (announcementTvTitle != null)
+                                announcementTvTitle.setText((String) task.getResult().get("title"));
+                            if (announcementTvBodytext != null)
+                                announcementTvBodytext.setText((String) task.getResult().get("text"));
+                            if (announcementTvDate != null) {
+                                Timestamp dateTs = (Timestamp) task.getResult().get("date");
+                                String dateString = dateTs.toDate().toString().substring(0, 10) + " ," + dateTs.toDate().toString().substring(29);
+                                announcementTvDate.setText(dateString);
+                            }
+                            if(announcementIvImage != null){
+                                MyUtils.showImageFromCloudStorage(context,"announcement_current_img", announcementIvImage,
+                                        getStorageInstance().getReference().child("generalImages"), R.drawable.image_empty);
+                            }
+                        }
+                    }
+                });
+    }
     /**
      * Method that fills passed in View with the profile picture of some other member.
      * @param context Context reference
@@ -262,7 +306,7 @@ public abstract class FirebaseHandler {
                                                    for (QueryDocumentSnapshot document : task.getResult()) {
                                                        try {
                                                            MyUtils.showImageFromCloudStorage(context,document.get(UserObject.FIELD_PROFILE_IMAGE_LOC).toString(),
-                                                                   imgv,R.drawable.image_empty);
+                                                                   imgv, getProfileImagesStorageReference(), R.drawable.image_empty);
                                                        }catch(NullPointerException ex){
                                                            Log.d(MainActivity.LOG_BR_ERROR, "Error getting full name : " + ex.getMessage());
                                                        }
@@ -295,7 +339,7 @@ public abstract class FirebaseHandler {
                                                        }catch(NullPointerException ex){
                                                            Log.d(MainActivity.LOG_BR_ERROR, "Error getting full name : " + ex.getMessage());
                                                        }
-                                                       Log.d(MainActivity.LOG_BR_INFO, document.getId() + " => " + document.getData());
+                                                       //Log.d(MainActivity.LOG_BR_INFO, document.getId() + " => " + document.getData());
                                                    }
                                                } else {
                                                    Log.d(MainActivity.LOG_BR_ERROR, "Error getting documents: ", task.getException());
@@ -321,11 +365,12 @@ public abstract class FirebaseHandler {
                         Toast.makeText(context, "Profile Image succesfully updated.",Toast.LENGTH_LONG).show();
                         UserObject.getUserObjectInstance().setProfileImageLocationInCloudStorage(ref);
                         MyUtils.showImageFromCloudStorage(context,UserObject.getUserObjectInstance().getProfileImageLocationInCloudStorage(),
-                                imgviewToUpdate, R.drawable.profile_image_placeholder);
+                                imgviewToUpdate, getProfileImagesStorageReference(), R.drawable.profile_image_placeholder);
                     }else{
                         Toast.makeText(context, "Updating profile image failed.",Toast.LENGTH_LONG).show();
                     }
                 });
 
     }
+
 }

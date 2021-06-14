@@ -112,7 +112,7 @@
         android:layout_width="180dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:text="@string/Announcements"
+        android:text="@string/Announcement"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/sw_notif_settings_Conversations" />
 

@@ -270,9 +270,6 @@ public class UpdateArticlesInDbFromBlog {
                 title = title.replaceAll("-"," ");
                 String imgLink = extractImgLink(from, stringToProcess);
                 String datePublished = extractDatePublished(from,stringToProcess);
-                Log.d(MainActivity.LOG_BR_INFO, "Link for scraping : "+linkToAnArticle);
-                Log.d(MainActivity.LOG_BR_INFO, "date : "+datePublished);
-                Log.d(MainActivity.LOG_BR_INFO," ");
 
                 Article article = new Article();
                 article.setTitle(title);

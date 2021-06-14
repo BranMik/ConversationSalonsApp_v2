@@ -58,7 +58,6 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
         this.context = ctx;
         this.isRecents = isRecents;
         rnd = new Random();
-        Log.d(MainActivity.LOG_BR_INFO,"Conversations View Adapter created, itemView id = " + itemViewResource);
     }
 
     /**
@@ -115,9 +114,7 @@ public class ConversationsViewAdapter extends FirestoreRecyclerAdapter<Conversat
     @NonNull
     @Override
     public ConversationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(MainActivity.LOG_BR_INFO,"onCreateViewHolder - 0");
         View view = LayoutInflater.from(parent.getContext()).inflate(itemViewResource, parent, false);
-        Log.d(MainActivity.LOG_BR_INFO,"onCreateViewHolder - 1");
         return new ConversationViewHolder(view);
     }
 

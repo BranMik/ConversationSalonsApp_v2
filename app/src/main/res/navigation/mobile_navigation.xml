@@ -25,6 +25,12 @@
         tools:layout="@layout/fragment_invitations" />
 
     <fragment
+        android:id="@+id/nav_announcement"
+        android:name="com.brankomikusic.conversation_salons_app_v2_1.AnnouncementFragment"
+        android:label="@string/Announcement"
+        tools:layout="@layout/fragment_announcement" />
+
+    <fragment
         android:id="@+id/nav_conversations"
         android:name="com.brankomikusic.conversation_salons_app_v2_1.ConversationsFragment"
         android:label="@string/Conversations"
