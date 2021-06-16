@@ -16,6 +16,7 @@
         android:largeHeap="true"
         >
         <activity android:name="com.brankomikusic.conversation_salons_app_v2_1.EnterNewInvitationActivity"/>
+        <activity android:name="com.brankomikusic.conversation_salons_app_v2_1.CreateNewAnnouncementActivity"/>
         <activity android:name="com.brankomikusic.conversation_salons_app_v2_1.EnterNewConversationActivity"/>
         <activity android:name="com.brankomikusic.conversation_salons_app_v2_1.EnterNewRecommendationActivity" />
         <activity android:name="com.brankomikusic.conversation_salons_app_v2_1.EnterNewPostActivity" />

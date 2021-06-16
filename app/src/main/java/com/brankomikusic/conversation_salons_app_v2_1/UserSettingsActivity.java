@@ -148,7 +148,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         if(UserObject.getUserObjectInstance().getIsAdmin() != null)
             activityUserSettingsBinding.swAdminMode.setChecked(UserObject.getUserObjectInstance().getIsAdmin());
         MyUtils.showImageFromCloudStorage(this,UserObject.getUserObjectInstance().getProfileImageLocationInCloudStorage(),
-                activityUserSettingsBinding.imgvSettingsProfilePic, R.drawable.profile_image_placeholder);
+                activityUserSettingsBinding.imgvSettingsProfilePic, FirebaseHandler.getProfileImagesStorageReference(), R.drawable.profile_image_placeholder);
     }
 
     /**
@@ -228,7 +228,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         final String imageCloudReference = UUID.randomUUID().toString();
         // Defining the child of storageReference
         StorageReference ref
-                = UserObject.getProfileImagesStorageRef().child("/"  + imageCloudReference);
+                = FirebaseHandler.getProfileImagesStorageReference().child("/"  + imageCloudReference);
 
         // adding listeners on upload
         // or failure of image

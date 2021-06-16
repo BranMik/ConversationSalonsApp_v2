@@ -47,7 +47,7 @@ public class MyUtils {
                 if(fallbackResource != null)
                     imgView.setImageResource(fallbackResource);
                 else
-                    imgView.setImageResource(R.drawable.articles_updating);
+                    imgView.setImageResource(R.drawable.default_image);
             });
         }
         // ImageView is set to default image if some error happened.
@@ -55,7 +55,7 @@ public class MyUtils {
             if(fallbackResource != null)
                 imgView.setImageResource(fallbackResource);
             else
-             imgView.setImageResource(R.drawable.articles_updating);
+             imgView.setImageResource(R.drawable.default_image);
         }
     }
 
@@ -75,7 +75,7 @@ public class MyUtils {
         }
             // ImageView is set to default image if some error happened.
         catch(NullPointerException | IllegalArgumentException exception){
-            imageView.setImageResource(R.drawable.articles_updating);
+            imageView.setImageResource(R.drawable.default_image);
         }
     }
 

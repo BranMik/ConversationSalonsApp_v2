@@ -21,7 +21,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.sql.Time;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Helper class with methods for communicating with Firebase.
@@ -264,6 +267,23 @@ public abstract class FirebaseHandler {
                 });
     }
 
+    public static void createAnnouncementInFirestore(String oldTitle, String oldText, String oldDate, String newTitle, String newText){
+        Calendar currentTime = Calendar.getInstance();
+        Map<String, Object> new_ann = new HashMap<>();
+        new_ann.put("title", newTitle);
+        new_ann.put("text", newText);
+        new_ann.put("date", new Timestamp(currentTime.getTime()));
+
+        Map<String, Object> old_ann = new HashMap<>();
+        old_ann.put("title", oldTitle);
+        old_ann.put("text", oldText);
+        old_ann.put("date", oldDate);
+
+        FirebaseHandler.getAnnouncementsCollectionReference().document("current").delete();
+        FirebaseHandler.getAnnouncementsCollectionReference().document("current").set(new_ann);
+        FirebaseHandler.getAnnouncementsCollectionReference().document("archive").collection("archive").add(old_ann);
+    }
+
     public static void populateAnnouncementFromFirestore(Context context, TextView announcementTvTitle, TextView announcementTvBodytext, TextView announcementTvDate, ImageView announcementIvImage) {
         FirebaseHandler.getAnnouncementsCollectionReference()
                 .document("current")
@@ -283,7 +303,7 @@ public abstract class FirebaseHandler {
                             }
                             if(announcementIvImage != null){
                                 MyUtils.showImageFromCloudStorage(context,"announcement_current_img", announcementIvImage,
-                                        getStorageInstance().getReference().child("generalImages"), R.drawable.image_empty);
+                                        getStorageInstance().getReference().child("generalImages"), R.drawable.consal_announcements_2);
                             }
                         }
                     }

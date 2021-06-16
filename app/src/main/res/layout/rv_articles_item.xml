@@ -43,7 +43,7 @@
                 android:contentDescription="@string/imgdesc_articles"
                 android:scaleType="centerInside"
                 android:visibility="visible"
-                tools:srcCompat="@drawable/articles_updating" />
+                tools:srcCompat="@drawable/default_image" />
 
             <TextView
                 android:id="@+id/rvitem_articles_tv_title"

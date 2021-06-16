@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/hint_invitation"
             android:scaleType="fitXY"
-            android:src="@drawable/articles_updating" />
+            android:src="@drawable/default_image" />
 
         <TextView
             android:id="@+id/textView3"

@@ -37,8 +37,8 @@
             android:layout_height="0dp"
             android:layout_margin="@dimen/text_margin"
             android:layout_weight="7"
-            app:srcCompat="@drawable/articles_updating"
-            tools:srcCompat="@drawable/articles_updating" />
+            app:srcCompat="@drawable/consal_announcements_2"
+            tools:srcCompat="@drawable/consal_announcements_2" />
 
         <TextView
             android:id="@+id/announcement_tv_title"

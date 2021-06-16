@@ -23,6 +23,9 @@ import java.sql.Time;
 public class AnnouncementFragment extends Fragment {
     private FragmentAnnouncementBinding fragmentAnnouncementBinding;
     private Context context;
+    public static final String KEY_EXTRA_ANNOUNCEMENT_TITLE = "announcement_extra_title";
+    public static final String KEY_EXTRA_ANNOUNCEMENT_TEXT = "announcement_extra_text";
+    public static final String KEY_EXTRA_ANNOUNCEMENT_DATE = "announcement_extra_date";
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -45,20 +48,31 @@ public class AnnouncementFragment extends Fragment {
 
         fragmentAnnouncementBinding = FragmentAnnouncementBinding.inflate(inflater,container,false);
         this.context = getContext();
-        setupListeners();
-        getData();
         return fragmentAnnouncementBinding.getRoot();
     }
 
     private void getData(){
         FirebaseHandler.populateAnnouncementFromFirestore(context, fragmentAnnouncementBinding.announcementTvTitle, fragmentAnnouncementBinding.announcementTvBodytext,
                 fragmentAnnouncementBinding.announcementTvDate,fragmentAnnouncementBinding.announcementIvImage);
-
     }
     private void setupListeners(){
-        fragmentAnnouncementBinding.announcementFabNewAnnouncement.setOnClickListener((view)->{
-            Intent intent_createNewAnnouncement = new Intent(context,CreateNewAnnouncementActivity.class);
-            startActivity(intent_createNewAnnouncement);
-        });
+        if(UserObject.getUserObjectInstance().getIsAdmin()) {
+            fragmentAnnouncementBinding.announcementFabNewAnnouncement.setOnClickListener((view) -> {
+                Intent intent_createNewAnnouncement = new Intent(context, CreateNewAnnouncementActivity.class);
+                intent_createNewAnnouncement.putExtra(KEY_EXTRA_ANNOUNCEMENT_TITLE, fragmentAnnouncementBinding.announcementTvTitle.getText());
+                intent_createNewAnnouncement.putExtra(KEY_EXTRA_ANNOUNCEMENT_TEXT, fragmentAnnouncementBinding.announcementTvBodytext.getText());
+                intent_createNewAnnouncement.putExtra(KEY_EXTRA_ANNOUNCEMENT_DATE, fragmentAnnouncementBinding.announcementTvDate.getText());
+                startActivity(intent_createNewAnnouncement);
+            });
+        }else{
+            fragmentAnnouncementBinding.announcementFabNewAnnouncement.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+        setupListeners();
     }
 }

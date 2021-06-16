@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,6 +51,8 @@ public class RecentFragment extends Fragment {
         context = getContext();
         fragmentRecentBinding = FragmentRecentBinding.inflate(inflater,container,false);
 
+        setupAnnouncement();
+
         fragmentRecentBinding.recentRvArticles.setLayoutManager(new LinearLayoutManager(fragmentRecentBinding.getRoot().getContext(),LinearLayoutManager.HORIZONTAL,false));
         fragmentRecentBinding.recentRvArticles.setAdapter(new ArticlesItemRecyclerViewAdapter(Article.ITEMS,getContext(),
                 fragmentRecentBinding.flArticlesUpdating,5, R.layout.rv_recent_article_item ));
@@ -63,7 +66,19 @@ public class RecentFragment extends Fragment {
         fragmentRecentBinding.recentRvRecommendations.setLayoutManager(new LinearLayoutManager(fragmentRecentBinding.getRoot().getContext(), LinearLayoutManager.HORIZONTAL, false));
         setupRecommendationsAdapter();
 
+        setupListeners();
+
         return fragmentRecentBinding.getRoot();
+    }
+
+
+    private void setupAnnouncement(){
+        FirebaseHandler.populateAnnouncementFromFirestore(context, fragmentRecentBinding.recentAnnouncementTvTitle, null,
+                fragmentRecentBinding.recentAnnouncementTvDate,fragmentRecentBinding.recentAnnouncementIv);
+
+        fragmentRecentBinding.recentCvAnnouncement.setOnClickListener((view)->{
+            Navigation.findNavController(view).navigate(R.id.action_nav_recent_to_nav_announcement);
+        });
     }
 
     private void setupConversationsAdapter(){
@@ -94,12 +109,25 @@ public class RecentFragment extends Fragment {
      }
 
     /**
-     * Sets up listener on a Floating action button
+     * Set up listeners for icons representing sections.
      *
-     * @param root root View reference
      */
-    private void setupListeners(View root){
-
+    private void setupListeners(){
+        fragmentRecentBinding.recentIvAnnouncement.setOnClickListener((view)->{
+            Navigation.findNavController(view).navigate(R.id.action_nav_recent_to_nav_announcement);
+        });
+        fragmentRecentBinding.recentIvArticles.setOnClickListener((view)->{
+            Navigation.findNavController(view).navigate(R.id.action_nav_recent_to_nav_articles);
+        });
+        fragmentRecentBinding.recentIvConversations.setOnClickListener((view)->{
+            Navigation.findNavController(view).navigate(R.id.action_nav_recent_to_nav_conversations);
+        });
+        fragmentRecentBinding.recentIvInvitations.setOnClickListener((view)->{
+            Navigation.findNavController(view).navigate(R.id.action_nav_recent_to_nav_invitations);
+        });
+        fragmentRecentBinding.recentIvRecommendations.setOnClickListener((view)->{
+            Navigation.findNavController(view).navigate(R.id.action_nav_recent_to_nav_recommendations);
+        });
     }
 
 

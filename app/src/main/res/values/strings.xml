@@ -94,4 +94,6 @@
     <string name="recent">Recent</string>
     <string name="update_name_failed">Updating name was unsuccessful. Try again later.</string>
     <string name="announcement_txt">Text of the announcement</string>
+    <string name="announcement_title_hint">Announcement title</string>
+    <string name="announcement_text_hint">Enter text of new announcement here</string>
 </resources>

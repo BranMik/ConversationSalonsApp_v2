@@ -6,26 +6,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="40"
+    android:weightSum="41"
     tools:context=".RecentFragment">
-
-    <LinearLayout
-        android:id="@+id/recent_ll_announcement"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:orientation="vertical">
-
-    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/card_margin"
+        android:layout_weight="11">
+
+        <ImageView
+            android:id="@+id/recent_iv_announcement"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/card_margin"
+            android:elevation="@dimen/popup_elevation"
+            android:src="@drawable/ic_menu_announcements_2" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/card_padding_hor"
+            android:layout_marginTop="@dimen/card_padding_ver"
+            android:layout_marginEnd="@dimen/card_padding_hor"
+            android:padding="@dimen/container_padding"
+            app:cardBackgroundColor="@color/brand_color_2_lighter_more"
+            app:cardCornerRadius="@dimen/card_cornerrad">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/recent_cv_announcement"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/recent_announcement_cv_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.7"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/recent_announcement_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/recent_announcement_cv_guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                <TextView
+                    android:id="@+id/recent_announcement_tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/title"
+                    android:textAlignment="center"
+                    android:textColor="@color/brand_color_1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recent_announcement_iv" />
+
+                <TextView
+                    android:id="@+id/recent_announcement_tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/text_margin_small"
+                    android:layout_marginBottom="@dimen/text_margin_small"
+                    android:text="@string/date"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.92"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recent_announcement_tv_title" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/card_margin"
         android:layout_weight="8">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/recent_iv_articles"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:elevation="@dimen/popup_elevation"
@@ -44,7 +121,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/hint_invitation"
                 android:scaleType="fitXY"
-                android:src="@drawable/articles_updating" />
+                android:src="@drawable/default_image" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -63,7 +140,7 @@
             android:id="@+id/recent_rv_articles"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/container_padding"
+            android:layout_marginTop="@dimen/card_margin"
             android:orientation="horizontal"
             tools:listitem="@layout/rv_articles_item" />
     </FrameLayout>
@@ -71,11 +148,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/card_margin"
         android:layout_weight="8">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/recent_iv_conversations"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:elevation="@dimen/popup_elevation"
@@ -93,11 +170,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/card_margin"
         android:layout_weight="7">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/recent_iv_invitations"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:elevation="@dimen/popup_elevation"
@@ -116,11 +193,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/card_margin"
         android:layout_weight="7">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/recent_iv_recommendations"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:elevation="@dimen/popup_elevation"

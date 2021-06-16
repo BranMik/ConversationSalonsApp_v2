@@ -16,6 +16,15 @@
         <action
             android:id="@+id/action_nav_recent_to_nav_recommendations"
             app:destination="@id/nav_recommendations" />
+        <action
+            android:id="@+id/action_nav_recent_to_nav_announcement"
+            app:destination="@id/nav_announcement" />
+        <action
+            android:id="@+id/action_nav_recent_to_nav_conversations"
+            app:destination="@id/nav_conversations" />
+        <action
+            android:id="@+id/action_nav_recent_to_nav_articles"
+            app:destination="@id/nav_articles" />
     </fragment>
 
     <fragment
