@@ -34,28 +34,46 @@ public class MyUtils {
      *
      */
     public static void showImageFromCloudStorage(@NonNull final Context context, String imgPath, @NonNull final ImageView imgView,
-                                                 StorageReference storageReference, final Integer fallbackResource){
+                                                 StorageReference storageReference, final Integer fallbackResource, boolean isProfilePic){
+        int radius = (isProfilePic)?70:40;
+        int margin = (isProfilePic)?0:0;
         try {
             storageReference.child(imgPath).getDownloadUrl().addOnSuccessListener(uri -> {
                 Glide.with(context)
                         .load(uri)
-                        .transform(new RoundedCornersTransformation(20, 10))
+                        .transform(new RoundedCornersTransformation(radius, margin))
                         .into(imgView);
             }).addOnFailureListener(exception -> {
                 // ImageView is set to default image if unsuccessful image loading from database.
                 Log.e(MainActivity.LOG_BR_ERROR, exception.getMessage());
                 if(fallbackResource != null)
-                    imgView.setImageResource(fallbackResource);
+                    //imgView.setImageResource(fallbackResource);
+                    Glide.with(context)
+                            .load(fallbackResource)
+                            .transform(new RoundedCornersTransformation(radius, margin))
+                            .into(imgView);
                 else
-                    imgView.setImageResource(R.drawable.default_image);
+                    //imgView.setImageResource(R.drawable.default_image);
+                    Glide.with(context)
+                            .load(R.drawable.default_image)
+                            .transform(new RoundedCornersTransformation(radius, margin))
+                            .into(imgView);
             });
         }
         // ImageView is set to default image if some error happened.
         catch(NullPointerException | IllegalArgumentException exception){
             if(fallbackResource != null)
-                imgView.setImageResource(fallbackResource);
+                //imgView.setImageResource(fallbackResource);
+                Glide.with(context)
+                        .load(fallbackResource)
+                        .transform(new RoundedCornersTransformation(radius, margin))
+                        .into(imgView);
             else
-             imgView.setImageResource(R.drawable.default_image);
+                //imgView.setImageResource(R.drawable.default_image);
+                Glide.with(context)
+                        .load(R.drawable.default_image)
+                        .transform(new RoundedCornersTransformation(radius, margin))
+                        .into(imgView);
         }
     }
 
@@ -75,7 +93,11 @@ public class MyUtils {
         }
             // ImageView is set to default image if some error happened.
         catch(NullPointerException | IllegalArgumentException exception){
-            imageView.setImageResource(R.drawable.default_image);
+            //imageView.setImageResource(R.drawable.default_image);
+            Glide.with(context)
+                    .load(R.drawable.default_image)
+                    .transform(new RoundedCornersTransformation(30,0))
+                    .into(imageView);
         }
     }
 

@@ -148,7 +148,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         if(UserObject.getUserObjectInstance().getIsAdmin() != null)
             activityUserSettingsBinding.swAdminMode.setChecked(UserObject.getUserObjectInstance().getIsAdmin());
         MyUtils.showImageFromCloudStorage(this,UserObject.getUserObjectInstance().getProfileImageLocationInCloudStorage(),
-                activityUserSettingsBinding.imgvSettingsProfilePic, FirebaseHandler.getProfileImagesStorageReference(), R.drawable.profile_image_placeholder);
+                activityUserSettingsBinding.imgvSettingsProfilePic, FirebaseHandler.getProfileImagesStorageReference(), R.drawable.profile_image_placeholder, true);
     }
 
     /**

@@ -42,8 +42,6 @@
             android:layout_height="90dp"
             android:background="@color/brand_color_2_lighter_more"
             android:contentDescription="@string/profile_pic"
-            android:foreground="@drawable/round_corner_big_navdrawer"
-            android:padding="20dp"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

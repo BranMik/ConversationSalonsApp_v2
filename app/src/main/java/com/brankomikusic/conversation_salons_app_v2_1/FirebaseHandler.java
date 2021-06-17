@@ -303,7 +303,7 @@ public abstract class FirebaseHandler {
                             }
                             if(announcementIvImage != null){
                                 MyUtils.showImageFromCloudStorage(context,"announcement_current_img", announcementIvImage,
-                                        getStorageInstance().getReference().child("generalImages"), R.drawable.consal_announcements_2);
+                                        getStorageInstance().getReference().child("generalImages"), R.drawable.consal_announcements_2, false);
                             }
                         }
                     }
@@ -326,7 +326,7 @@ public abstract class FirebaseHandler {
                                                    for (QueryDocumentSnapshot document : task.getResult()) {
                                                        try {
                                                            MyUtils.showImageFromCloudStorage(context,document.get(UserObject.FIELD_PROFILE_IMAGE_LOC).toString(),
-                                                                   imgv, getProfileImagesStorageReference(), R.drawable.image_empty);
+                                                                   imgv, getProfileImagesStorageReference(), R.drawable.image_empty, true);
                                                        }catch(NullPointerException ex){
                                                            Log.d(MainActivity.LOG_BR_ERROR, "Error getting full name : " + ex.getMessage());
                                                        }
@@ -385,7 +385,7 @@ public abstract class FirebaseHandler {
                         Toast.makeText(context, "Profile Image succesfully updated.",Toast.LENGTH_LONG).show();
                         UserObject.getUserObjectInstance().setProfileImageLocationInCloudStorage(ref);
                         MyUtils.showImageFromCloudStorage(context,UserObject.getUserObjectInstance().getProfileImageLocationInCloudStorage(),
-                                imgviewToUpdate, getProfileImagesStorageReference(), R.drawable.profile_image_placeholder);
+                                imgviewToUpdate, getProfileImagesStorageReference(), R.drawable.profile_image_placeholder, true);
                     }else{
                         Toast.makeText(context, "Updating profile image failed.",Toast.LENGTH_LONG).show();
                     }

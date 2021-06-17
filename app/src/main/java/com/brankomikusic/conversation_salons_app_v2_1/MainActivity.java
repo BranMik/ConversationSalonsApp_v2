@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         if(UserObject.getUserObjectInstance().getFullName() != null && UserObject.getUserObjectInstance().getFullName().length()>1)
             tv_fullnameInDrawer.setText(UserObject.getUserObjectInstance().getFullName());
         MyUtils.showImageFromCloudStorage(context,UserObject.getUserObjectInstance().getProfileImageLocationInCloudStorage(),
-                imgv_profileImgInDrawer, FirebaseHandler.getProfileImagesStorageReference(), R.drawable.image_empty);
+                imgv_profileImgInDrawer, FirebaseHandler.getProfileImagesStorageReference(), R.drawable.image_empty, true);
     }
 
     /**
