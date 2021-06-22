@@ -1,6 +1,7 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -55,6 +57,25 @@ public abstract class FirebaseHandler {
         return mAuth;
     }
 
+    public static void setFirebaseAuthInstance(FirebaseAuth newAuthInstance){
+        mAuth = newAuthInstance;
+    }
+
+    public static void signOut(Context context) {
+        FirebaseUILoginActivity.getGoogleSignInClient(context).signOut();
+        FirebaseHandler.getFirebaseAuthInstance().signOut();
+    }
+
+    public static void signOut_new(Context context){
+        AuthUI.getInstance()
+                .signOut(context)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // user is now signed out
+                        context.startActivity(new Intent(context, FirebaseUILoginActivity.class));
+                    }
+                });
+    }
     /**
      * Getter for Firebase Firestore instance.
      * @return Firebase Firestore instance

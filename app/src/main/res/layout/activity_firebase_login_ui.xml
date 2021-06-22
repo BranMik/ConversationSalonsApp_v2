@@ -5,20 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="4"
-    tools:context=".FirebaseLoginWithGmailActivity">
+    android:weightSum="4">
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="20dp"
         android:layout_weight="2"
         android:contentDescription="@string/desc_firebase_lockup"
-        android:src="@drawable/consal_logo_whbckg" />
+        android:src="@drawable/consal_logo_whbckg"/>
 
     <TextView
-        android:id="@+id/titleText2"
+        android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -29,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <Button
-        android:id="@+id/signInButton"
+        android:id="@+id/firebaseLoginScreen_b_signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -41,6 +39,34 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText2" />
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <Button
+        android:id="@+id/firebaseLoginScreen_b_signInGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:backgroundTint="@color/white"
+        android:drawableStart="@drawable/googleg_standard_color_18"
+        android:drawablePadding="@dimen/card_padding_hor"
+        android:text="@string/sign_in_google"
+        android:textSize="10sp" />
+
+    <Button
+        android:id="@+id/firebaseLoginScreen_b_createAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:text="@string/b_createAccount"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:theme="@style/ThemeOverlay.MyDarkButton"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firebaseLoginScreen_b_signIn" />
 
 </LinearLayout>

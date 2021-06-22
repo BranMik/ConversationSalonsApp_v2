@@ -72,9 +72,8 @@ public class UserSettingsActivity extends AppCompatActivity {
         });
 
         activityUserSettingsBinding.bSignOut.setOnClickListener((view)->{
-                FirebaseLoginWithGmailActivity.getGoogleSignInClient(this).signOut();
-                FirebaseHandler.getFirebaseAuthInstance().signOut();
-                Intent intent = new Intent(this,FirebaseLoginWithGmailActivity.class);
+                FirebaseHandler.signOut(this);
+                Intent intent = new Intent(this, FirebaseUILoginActivity.class);
                 startActivity(intent);
         });
         activityUserSettingsBinding.imgvSettingsProfilePic.setOnClickListener((view)->{

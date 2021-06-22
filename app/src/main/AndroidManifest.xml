@@ -30,7 +30,7 @@
             android:name="com.brankomikusic.conversation_salons_app_v2_1.MainActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="com.brankomikusic.conversation_salons_app_v2_1.FirebaseLoginWithGmailActivity"
+            android:name="com.brankomikusic.conversation_salons_app_v2_1.FirebaseUILoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

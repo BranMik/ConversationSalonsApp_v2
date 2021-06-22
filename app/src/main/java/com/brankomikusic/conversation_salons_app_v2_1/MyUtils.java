@@ -1,10 +1,14 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.storage.StorageReference;
 
@@ -98,6 +102,43 @@ public class MyUtils {
                     .load(R.drawable.default_image)
                     .transform(new RoundedCornersTransformation(30,0))
                     .into(imageView);
+        }
+    }
+
+    public static boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    /**
+     * Utility method that shows standardized custom AlertDialog.
+     *
+     * @param context Originating context reference.
+     * @param alertMessage String holding message for the user that will be shown in AlertDialog.
+     * @param alertType Variable signifying my AlertDialog type which determines its title and theme.
+     * @param onClickEvent Passed in OnClickListener that will be set on AlertDialog confirmation button.
+     */
+    public static void showAlertMessage(@NonNull Context context, String alertMessage, @NonNull AlertType alertType,
+                                        DialogInterface.OnClickListener onClickEvent){
+        String alertTitle;
+        int alertTheme;
+
+        if(alertType == AlertType.POSITIVE){
+            alertTitle = context.getString(R.string.good_notification_title);
+            alertTheme = R.style.GoodAlertDialogStyle;
+        }else{
+            alertTitle = context.getString(R.string.alert_notification_title);
+            alertTheme = R.style.AlertDialogStyle;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, alertTheme);
+        builder.setTitle(alertTitle).setMessage(alertMessage).setPositiveButton("OK", onClickEvent)
+                .setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        Button b =dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if(b != null){
+            b.setTextSize(20);
+            b.setTextColor(context.getColor(R.color.white));
         }
     }
 
