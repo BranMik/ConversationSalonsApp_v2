@@ -1,8 +1,11 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,12 +64,7 @@ public abstract class FirebaseHandler {
         mAuth = newAuthInstance;
     }
 
-    public static void signOut(Context context) {
-        FirebaseUILoginActivity.getGoogleSignInClient(context).signOut();
-        FirebaseHandler.getFirebaseAuthInstance().signOut();
-    }
-
-    public static void signOut_new(Context context){
+    public static void signOut(Context context){
         AuthUI.getInstance()
                 .signOut(context)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -166,6 +164,51 @@ public abstract class FirebaseHandler {
             return FirebaseHandler.getConversationsCollectionReference().document(parentDocumentId).collection("posts");
     }
 
+    public static void sendEmailVerification(FirebaseUser user, Context context){
+        user.sendEmailVerification()
+                .addOnCompleteListener((Activity) context, new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if (task.isSuccessful()) {
+                            MyUtils.showAlertMessage(context, context.getString(R.string.message_email_verification_sent),
+                                    MyUtils.AlertType.POSITIVE, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            signOut(context);
+                                        }
+                                    });
+                        } else {
+                            Toast.makeText(context,
+                                    "Failed to send verification email.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    public static void deleteAccount(Context context){
+        AuthUI.getInstance()
+                .delete(context)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            getMembersCollectionReference().document(UserObject.getUserObjectInstance().getUserDocumentIdInMembers()).delete();
+                            MyUtils.showAlertMessage(context, context.getString(R.string.message_account_deleted), MyUtils.AlertType.POSITIVE,
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            signOut(context);
+                                        }
+                                    });
+                        } else {
+                            MyUtils.showAlertMessage(context, context.getString(R.string.message_account_delete_failed), MyUtils.AlertType.NEGATIVE,null);
+
+                        }
+                    }
+                });
+    }
+
     /**
      * Method to create new member entry/document in Firestore database.
      *
@@ -177,12 +220,25 @@ public abstract class FirebaseHandler {
                 .add(UserObject.createUserObjectInstanceForNewMember(user))
                 .addOnCompleteListener((task)->{
                     if(task.isSuccessful()){
-                        Toast.makeText(context,context.getString(R.string.message_createuser_success,user.getDisplayName()),Toast.LENGTH_LONG).show();
-                        task.getResult().get().addOnCompleteListener((documentSnapshot)->{
+                        //Toast.makeText(context,context.getString(R.string.message_createuser_success,user.getDisplayName()),Toast.LENGTH_LONG).show();
+                        MyUtils.showAlertMessage(context, context.getString(R.string.message_createuser_success, user.getDisplayName()), MyUtils.AlertType.POSITIVE,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        sendEmailVerification(user, context);
+                                    }
+                                });
+                        /*task.getResult().get().addOnCompleteListener((documentSnapshot) -> {
                             UserObject.createUserObjectInstanceForExistingMember(documentSnapshot.getResult());
-                        });
+                        });*/
                     }else{
-                        Toast.makeText(context,context.getString(R.string.message_createuser_fail,user.getDisplayName()),Toast.LENGTH_LONG).show();
+                        MyUtils.showAlertMessage(context, context.getString(R.string.message_createuser_fail, user.getDisplayName()), MyUtils.AlertType.NEGATIVE,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        signOut(context);
+                                    }
+                                });
                     }
                 });
     }
@@ -399,7 +455,7 @@ public abstract class FirebaseHandler {
      * @param imgviewToUpdate Reference of ImageView that is to be filled with new profile picture.
      */
     public static void updateProfileImg(Context context, String ref, ImageView imgviewToUpdate){
-        getMembersCollectionReference().document(UserObject.userDocumentId_InMembersCollection)
+        getMembersCollectionReference().document(UserObject.getUserObjectInstance().getUserDocumentIdInMembers())
                 .update(UserObject.FIELD_PROFILE_IMAGE_LOC,ref)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){

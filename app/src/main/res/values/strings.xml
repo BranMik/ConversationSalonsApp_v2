@@ -11,6 +11,8 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
+    <string name="anonymous">Anonymous</string>
+
     <string name="firebaseui_login_title_text">Welcome to Conversation Salons</string>
     <string name="signed_out">Signed Out</string>
     <string name="desc_firebase_lockup">Firebase logo and name</string>
@@ -29,7 +31,8 @@
     <string name="message_createuser_fail">New user %s could not be created. Try again later.</string>
 
     <string name="alert_notification_title">Warning!</string>
-    <string name="good_notification_title">Good news!</string>
+    <string name="good_notification_title">Hi.</string>
+    <string name="info_message_title">Attention!</string>
 
     <string name="alert_createacc_emailerr">Email entered is in wrong format!</string>
     <string name="alert_createacc_nameerr">Name is too short.</string>
@@ -97,4 +100,12 @@
     <string name="announcement_title_hint">Announcement title</string>
     <string name="announcement_text_hint">Enter text of new announcement here</string>
     <string name="sign_in_google">Sign in with Google</string>
+    <string name="message_email_verification_sent">"Email verification was sent now. You must verify your email address by following the link in the verification email before you can log in into app with this email credential."</string>
+    <string name="message_email_not_verified">"Email address you used to sign in is not verified. You must verify your email address by following the link in the verification email you received after using this email first time for signing into the app."</string>
+    <string name="message_del_account_confirm">"Are you sure you want to delete the account?"</string>
+    <string name="message_account_deleted">"User acccount was sucessfully deleted."</string>
+    <string name="message_account_delete_failed">"User acccount could not be deleted."</string>
+    <string name="message_signed_in">"You are signed into Conversation Salons App with email '%s' , as '%s'."</string>
+    <string name="b_delete_account">DELETE ACCOUNT</string>
+    <string name="terms_privacy">terms and privacy statements links</string>
 </resources>

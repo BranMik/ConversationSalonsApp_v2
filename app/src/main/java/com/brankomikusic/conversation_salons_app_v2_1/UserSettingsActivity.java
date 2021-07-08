@@ -1,10 +1,12 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
@@ -72,18 +74,32 @@ public class UserSettingsActivity extends AppCompatActivity {
         });
 
         activityUserSettingsBinding.bSignOut.setOnClickListener((view)->{
-                FirebaseHandler.signOut(this);
-                Intent intent = new Intent(this, FirebaseUILoginActivity.class);
-                startActivity(intent);
+            FirebaseHandler.signOut(this);
         });
+
+        activityUserSettingsBinding.bDeleteAccount.setOnClickListener((view)->{
+            MyUtils.showAlertMessage(this, getString(R.string.message_del_account_confirm), MyUtils.AlertType.YES_NO,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if(i != -1){
+                                FirebaseHandler.deleteAccount(UserSettingsActivity.this);
+                            }
+                            Log.d(MainActivity.LOG_BR_INFO,"i = "+i);
+                        }
+                    });
+        });
+
         activityUserSettingsBinding.imgvSettingsProfilePic.setOnClickListener((view)->{
             selectImage();
         });
+
         activityUserSettingsBinding.imgvSettingsGoback.setOnClickListener((view)->{
             //finish();
             Intent intent = new Intent(UserSettingsActivity.this, MainActivity.class);
             startActivity(intent);
         });
+
         activityUserSettingsBinding.swNotifSettingsAllnewposts.setOnCheckedChangeListener((view,state)->{
             if(state){
                 UserObject.UserSettings.turnOnNotification(UserObject.UserSettings.NotificationTypes.ALLNEWPOSTS);
@@ -91,6 +107,7 @@ public class UserSettingsActivity extends AppCompatActivity {
                 UserObject.UserSettings.turnOffNotification(UserObject.UserSettings.NotificationTypes.ALLNEWPOSTS);
             }
         });
+
         activityUserSettingsBinding.swNotifSettingsRecommendations.setOnCheckedChangeListener((view,state)->{
             if(state){
                 UserObject.UserSettings.turnOnNotification(UserObject.UserSettings.NotificationTypes.NEW_RECOMMENDATION);
@@ -98,6 +115,7 @@ public class UserSettingsActivity extends AppCompatActivity {
                 UserObject.UserSettings.turnOffNotification(UserObject.UserSettings.NotificationTypes.NEW_RECOMMENDATION);
             }
         });
+
         activityUserSettingsBinding.swNotifSettingsInvitations.setOnCheckedChangeListener((view,state)->{
             if(state){
                 UserObject.UserSettings.turnOnNotification(UserObject.UserSettings.NotificationTypes.NEW_INVITATION);
@@ -105,6 +123,7 @@ public class UserSettingsActivity extends AppCompatActivity {
                 UserObject.UserSettings.turnOffNotification(UserObject.UserSettings.NotificationTypes.NEW_INVITATION);
             }
         });
+
         activityUserSettingsBinding.swNotifSettingsConversations.setOnCheckedChangeListener((view,state)->{
             if(state){
                 UserObject.UserSettings.turnOnNotification(UserObject.UserSettings.NotificationTypes.NEW_CONVERSATION_TOPIC);
@@ -112,6 +131,7 @@ public class UserSettingsActivity extends AppCompatActivity {
                 UserObject.UserSettings.turnOffNotification(UserObject.UserSettings.NotificationTypes.NEW_CONVERSATION_TOPIC);
             }
         });
+
         activityUserSettingsBinding.swNotifSettingsArticles.setOnCheckedChangeListener((view,state)->{
 
             if(state){
@@ -120,6 +140,7 @@ public class UserSettingsActivity extends AppCompatActivity {
                 UserObject.UserSettings.turnOffNotification(UserObject.UserSettings.NotificationTypes.NEW_ARTICLE);
             }
         });
+
         activityUserSettingsBinding.swNotifSettingsAnnouncements.setOnCheckedChangeListener((view,state)->{
             if(state){
                 UserObject.UserSettings.turnOnNotification(UserObject.UserSettings.NotificationTypes.NEW_ANNOUNCEMENT);
@@ -127,6 +148,7 @@ public class UserSettingsActivity extends AppCompatActivity {
                 UserObject.UserSettings.turnOffNotification(UserObject.UserSettings.NotificationTypes.NEW_ANNOUNCEMENT);
             }
         });
+
         activityUserSettingsBinding.swAdminMode.setOnCheckedChangeListener((view,state)->{
             if(state){
                 UserObject.getUserObjectInstance().setIsAdmin(true);

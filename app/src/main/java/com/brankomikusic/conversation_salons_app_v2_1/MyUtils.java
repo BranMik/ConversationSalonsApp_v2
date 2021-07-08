@@ -26,7 +26,7 @@ public class MyUtils {
      *
      */
     public enum AlertType{
-        POSITIVE,NEGATIVE
+        POSITIVE,NEGATIVE,INFO,YES_NO
     }
 
     /**
@@ -125,14 +125,26 @@ public class MyUtils {
         if(alertType == AlertType.POSITIVE){
             alertTitle = context.getString(R.string.good_notification_title);
             alertTheme = R.style.GoodAlertDialogStyle;
-        }else{
+        }else if(alertType == AlertType.NEGATIVE){
             alertTitle = context.getString(R.string.alert_notification_title);
             alertTheme = R.style.AlertDialogStyle;
+        }else{
+            alertTitle = context.getString(R.string.info_message_title);
+            alertTheme = R.style.GoodAlertDialogStyle;
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context, alertTheme);
-        builder.setTitle(alertTitle).setMessage(alertMessage).setPositiveButton("OK", onClickEvent)
-                .setCancelable(false);
+        if(alertType != AlertType.YES_NO) {
+            builder.setTitle(alertTitle).setMessage(alertMessage).setPositiveButton("OK", onClickEvent)
+                    .setCancelable(false);
+            if(alertType == AlertType.INFO){
+                builder.setNeutralButton("RESEND EMAIL VERIFICATION",onClickEvent);
+            }
+        }else{
+            builder.setTitle(alertTitle).setMessage(alertMessage).setPositiveButton("NO", onClickEvent)
+                    .setNegativeButton("YES", onClickEvent).setCancelable(false);
+        }
+
         AlertDialog dialog = builder.create();
         dialog.show();
         Button b =dialog.getButton(DialogInterface.BUTTON_POSITIVE);

@@ -85,7 +85,7 @@
                 android:layout_width="61dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@string/full_name"
+                android:text="@string/anonymous"
                 app:layout_constraintEnd_toEndOf="@+id/invitations_item_imgv"
                 app:layout_constraintStart_toStartOf="@+id/invitations_item_imgv"
                 app:layout_constraintTop_toBottomOf="@+id/invitations_item_imgv" />

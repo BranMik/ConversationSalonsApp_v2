@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:text="@string/full_name"
+                android:text="@string/anonymous"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@+id/recommendation_item_imgv"
                 app:layout_constraintStart_toStartOf="@+id/recommendation_item_imgv"

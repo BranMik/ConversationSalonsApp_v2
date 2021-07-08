@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.brankomikusic.conversationsalonsapp",
+  "applicationId": "com.brankomikusic.conversation_salons_app_v2_1",
   "variantName": "processReleaseResources",
   "elements": [
     {

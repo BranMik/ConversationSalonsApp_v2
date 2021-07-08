@@ -39,7 +39,7 @@ public class UserObject {
     private Boolean isMembershipConfirmed;
     private Boolean isAdmin;
 
-    public static String userDocumentId_InMembersCollection;
+    private String userDocumentId_InMembersCollection;
 
     /**
      * Required empty constructor.
@@ -74,8 +74,12 @@ public class UserObject {
         this.fullName = (String)documentSnapshot.get(FIELD_FULL_NAME);
         this.email = (String)documentSnapshot.get(FIELD_EMAIL);
         this.profileImageLocationInCloudStorage = (String)documentSnapshot.get(FIELD_PROFILE_IMAGE_LOC);
-        userDocumentId_InMembersCollection = documentSnapshot.getId();
+        this.userDocumentId_InMembersCollection = documentSnapshot.getId();
         // MyUtils.parseImageLocalPathFromStorageLocation(this.profileImageLocationInFBStorage);
+    }
+
+    public String getUserDocumentIdInMembers(){
+        return this.userDocumentId_InMembersCollection;
     }
 
     public String getProfileImageLocationInCloudStorage() {
@@ -137,7 +141,7 @@ public class UserObject {
     }
 
     public static void changeUserFullNameInFirestore(Context context, String newName){
-        FirebaseHandler.getMembersCollectionReference().document(UserObject.userDocumentId_InMembersCollection).update("fullName", newName)
+        FirebaseHandler.getMembersCollectionReference().document(UserObject.getUserObjectInstance().getUserDocumentIdInMembers()).update("fullName", newName)
             .addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     UserObject.changeUserNameLocaly(newName);

@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="4dp"
-        android:text="@string/post_author"
+        android:text="@string/anonymous"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="parent"

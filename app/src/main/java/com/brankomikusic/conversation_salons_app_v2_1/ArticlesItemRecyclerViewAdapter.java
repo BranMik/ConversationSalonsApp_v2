@@ -56,7 +56,7 @@ public class ArticlesItemRecyclerViewAdapter extends RecyclerView.Adapter<Articl
                                            int item_view_resource) {
         this.context = context;
         this.itemViewResource = item_view_resource;
-        if(limit>0) mValues = items.subList(0,limit) ;
+        if(limit>0 && limit<items.size()) mValues = items.subList(0,limit) ;
         else mValues = items;
         if(mValues.size()<=1){
             frameLayout_update.setVisibility(View.VISIBLE);
