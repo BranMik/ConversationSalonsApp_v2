@@ -31,7 +31,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="8"
             android:background="@color/brand_color_2_lighter_more"
             android:elevation="5dp"
             android:orientation="vertical"
@@ -75,11 +75,24 @@
             </ScrollView>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@color/highlight_1"
+            android:padding="@dimen/container_padding"
+            android:text="@string/message_values"
+            android:textAlignment="center"
+            android:textColor="@color/brand_color_1_secondary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/conversation_detail_rv_postslist"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6">
+            android:layout_weight="9">
 
         </androidx.recyclerview.widget.RecyclerView>
 

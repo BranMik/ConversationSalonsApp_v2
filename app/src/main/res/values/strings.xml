@@ -108,4 +108,5 @@
     <string name="message_signed_in">"You are signed into Conversation Salons App with email '%s' , as '%s'."</string>
     <string name="b_delete_account">DELETE ACCOUNT</string>
     <string name="terms_privacy">terms and privacy statements links</string>
+    <string name="message_values">Conversation Salons require participants in discussions to be respectful of and sensitive to others’ viewpoints, beliefs and values.</string>
 </resources>
