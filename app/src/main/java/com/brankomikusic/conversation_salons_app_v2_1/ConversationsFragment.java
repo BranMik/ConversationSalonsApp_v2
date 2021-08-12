@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import com.brankomikusic.conversation_salons_app_v2_1.backgroundtasks.UpdateArticlesInDbFromBlog;
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentConversationsListBinding;
 import com.brankomikusic.conversation_salons_app_v2_1.room_sqlite.Article;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.Query;
 
 /**
@@ -42,11 +41,12 @@ public class ConversationsFragment extends Fragment {
      */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_conversations_list, container, false);
         context = getContext();
-        setupAdminOptions(root);
-        setupFirestoreRecyclerView(root);
-        return root;
+        FragmentConversationsListBinding fragmentConversationsListBinding = FragmentConversationsListBinding.inflate(inflater,
+                container,false);
+        setupAdminOptions(fragmentConversationsListBinding);
+        setupFirestoreRecyclerView(fragmentConversationsListBinding);
+        return fragmentConversationsListBinding.getRoot();
     }
 
     /**
@@ -66,13 +66,12 @@ public class ConversationsFragment extends Fragment {
     /**
      * Check is made if loged-in user is admin, if true then Floating Action Button for adding new Conversations
      * is shown and onClick action added, otherwise button stays invisible.
-     * @param root Reference to the root View of the layout
+     * @param fragmentConversationsListBinding Reference to the View binder
      */
-    private void setupAdminOptions(View root){
+    private void setupAdminOptions(FragmentConversationsListBinding fragmentConversationsListBinding){
         if(UserObject.getUserObjectInstance().getIsAdmin()){
-            FloatingActionButton fabNewConversation = root.findViewById(R.id.fab_newConversation);
-            fabNewConversation.setVisibility(View.VISIBLE);
-            fabNewConversation.setOnClickListener((view)->{
+            fragmentConversationsListBinding.fabNewConversation.setVisibility(View.VISIBLE);
+            fragmentConversationsListBinding.fabNewConversation.setOnClickListener((view)->{
                 Intent newConversationIntent = new Intent(context, EnterNewConversationActivity.class);
                 startActivity(newConversationIntent);
             });
@@ -82,17 +81,15 @@ public class ConversationsFragment extends Fragment {
     /**
      * Sets up RecyclerView with FirestoreRecyclerAdapter.
      */
-    private void setupFirestoreRecyclerView(View root){
+    private void setupFirestoreRecyclerView(FragmentConversationsListBinding fragmentConversationsListBinding){
         Query query = FirebaseHandler.getConversationsCollectionReference().orderBy("creationTime", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<ConversationObject> options = new FirestoreRecyclerOptions.Builder<ConversationObject>()
                 .setQuery(query,ConversationObject.class)
                 .build();
-        Log.d(MainActivity.LOG_BR_INFO,"Size of query : " + String.valueOf(options.getSnapshots().size()));
         conversationsViewAdapter = new ConversationsViewAdapter(options,getContext(),R.layout.rv_conversations_item, false);
-        RecyclerView rvConversationsList = root.findViewById(R.id.rv_conversationslist);
-        rvConversationsList.setHasFixedSize(true);
-        rvConversationsList.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvConversationsList.setAdapter(conversationsViewAdapter);
+        fragmentConversationsListBinding.rvConversationslist.setHasFixedSize(true);
+        fragmentConversationsListBinding.rvConversationslist.setLayoutManager(new LinearLayoutManager(getContext()));
+        fragmentConversationsListBinding.rvConversationslist.setAdapter(conversationsViewAdapter);
     }
 
     /**

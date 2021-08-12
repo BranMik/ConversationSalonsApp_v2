@@ -7,14 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentInvitationsBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.Query;
 
 /**
@@ -41,39 +38,38 @@ public class InvitationsFragment extends Fragment {
      */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_invitations, container, false);
         context = getContext();
-        setupFirestoreRecyclerView(root);
-        setupListeners(root);
-        return root;
+        FragmentInvitationsBinding fragmentInvitationsBinding = FragmentInvitationsBinding.inflate(inflater,container,false);
+        setupFirestoreRecyclerView(fragmentInvitationsBinding);
+        setupListeners(fragmentInvitationsBinding);
+        return fragmentInvitationsBinding.getRoot();
     }
 
     /**
      * Sets up listener on a Floating action button
      *
-     * @param root root View reference
+     * @param fragmentInvitationsBinding  View binder reference
      */
-    private void setupListeners(View root){
-        FloatingActionButton fabNewInvitation = root.findViewById(R.id.fab_newInvitation);
-        fabNewInvitation.setOnClickListener((view)->{
+    private void setupListeners(FragmentInvitationsBinding fragmentInvitationsBinding){
+        fragmentInvitationsBinding.fabNewInvitation.setOnClickListener((view)->{
             Intent newInvitationIntent = new Intent(context, EnterNewInvitationActivity.class);
             startActivity(newInvitationIntent);
         });
     }
+
     /**
      * Sets up RecyclerView with FirestoreRecyclerAdapter.
      */
-    private void setupFirestoreRecyclerView(View root){
+    private void setupFirestoreRecyclerView(FragmentInvitationsBinding fragmentInvitationsBinding){
         Query query = FirebaseHandler.getInvitationsCollectionReference().orderBy("creationTime", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<InvitationObject> options = new FirestoreRecyclerOptions.Builder<InvitationObject>()
                 .setQuery(query, InvitationObject.class)
                 .build();
         Log.d(MainActivity.LOG_BR_INFO,"Invitations size of query : " + String.valueOf(options.getSnapshots().size()));
         invitationsViewAdapter = new InvitationsViewAdapter(options,getContext(), R.layout.rv_invitation_item, false);
-        RecyclerView rvInvitationList = root.findViewById(R.id.invitations_list_rv);
-        rvInvitationList.setHasFixedSize(true);
-        rvInvitationList.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvInvitationList.setAdapter(invitationsViewAdapter);
+        fragmentInvitationsBinding.invitationsListRv.setHasFixedSize(true);
+        fragmentInvitationsBinding.invitationsListRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        fragmentInvitationsBinding.invitationsListRv.setAdapter(invitationsViewAdapter);
     }
 
     /**

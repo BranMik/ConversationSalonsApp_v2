@@ -3,9 +3,7 @@ package com.brankomikusic.conversation_salons_app_v2_1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.brankomikusic.conversation_salons_app_v2_1.databinding.ActivityCreateAccountBinding;
 
 public class CreateAccountActivity extends AppCompatActivity {

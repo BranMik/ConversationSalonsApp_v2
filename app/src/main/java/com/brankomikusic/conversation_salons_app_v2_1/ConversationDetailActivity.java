@@ -1,19 +1,14 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.ActivityConversationDetailBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.Query;
 
 /**
@@ -25,7 +20,7 @@ import com.google.firebase.firestore.Query;
 public class ConversationDetailActivity extends AppCompatActivity {
 
     private PostViewAdapter postViewAdapter;
-    private RecyclerView recyclerView;
+    ActivityConversationDetailBinding activityConversationDetailBinding;
 
     /**
      * Toolbar is set up here with home (back) button enabled. Values are fetched from bundle object
@@ -36,25 +31,20 @@ public class ConversationDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_conversation_detail);
+        activityConversationDetailBinding = ActivityConversationDetailBinding.inflate(getLayoutInflater());
+        setContentView(activityConversationDetailBinding.getRoot());
 
-        Toolbar toolbar = findViewById(R.id.toolbar_conversation_detail);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(activityConversationDetailBinding.toolbarConversationDetail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //show back button
 
         Intent intent = getIntent();
         Bundle conversationBundle = intent.getBundleExtra(ConversationsViewAdapter.INTENT_EXTRA_KEY_BUNDLE);
-        TextView tv_title = findViewById(R.id.conversation_detail_tv_title);
-        TextView tv_intro = findViewById(R.id.conversation_detail_tv_intro);
-        ScrollView scr_view = findViewById(R.id.conversation_detail_scrollview);
-        FloatingActionButton fabNewPost = findViewById(R.id.conversation_detail_fab_newpost);
-        recyclerView = findViewById(R.id.conversation_detail_rv_postslist);
 
-        tv_title.setText(conversationBundle.getString(ConversationsViewAdapter.BUNDLE_KEY_CONVERSATION_TITLE,""));
-        tv_intro.setText(conversationBundle.getString(ConversationsViewAdapter.BUNDLE_KEY_CONVERSATION_INTRO,""));
-        scr_view.fullScroll(View.FOCUS_UP);
+        activityConversationDetailBinding.conversationDetailTvTitle.setText(conversationBundle.getString(ConversationsViewAdapter.BUNDLE_KEY_CONVERSATION_TITLE,""));
+        activityConversationDetailBinding.conversationDetailTvIntro.setText(conversationBundle.getString(ConversationsViewAdapter.BUNDLE_KEY_CONVERSATION_INTRO,""));
+        activityConversationDetailBinding.conversationDetailScrollview.fullScroll(View.FOCUS_UP);
 
-        fabNewPost.setOnClickListener((view)-> {
+        activityConversationDetailBinding.conversationDetailFabNewpost.setOnClickListener((view)-> {
             Intent intentPost = new Intent(this, EnterNewPostActivity.class);
             Bundle postEntryBundle = new Bundle();
             postEntryBundle.putString(ConversationsViewAdapter.BUNDLE_KEY_CONVERSATION_DOCUMENTID,
@@ -77,9 +67,9 @@ public class ConversationDetailActivity extends AppCompatActivity {
                 .setQuery(query, PostObject.class)
                 .build();
         postViewAdapter = new PostViewAdapter(options, this);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(postViewAdapter);
+        activityConversationDetailBinding.conversationDetailRvPostslist.setHasFixedSize(true);
+        activityConversationDetailBinding.conversationDetailRvPostslist.setLayoutManager(new LinearLayoutManager(this));
+        activityConversationDetailBinding.conversationDetailRvPostslist.setAdapter(postViewAdapter);
     }
 
     /**
@@ -91,7 +81,7 @@ public class ConversationDetailActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         postViewAdapter.startListening();
-        recyclerView.scrollToPosition(0);
+        activityConversationDetailBinding.conversationDetailRvPostslist.scrollToPosition(0);
     }
 
     /**

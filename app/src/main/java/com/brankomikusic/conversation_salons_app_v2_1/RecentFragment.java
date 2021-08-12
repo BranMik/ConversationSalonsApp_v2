@@ -1,9 +1,7 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentArticlesListBinding;
 import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentRecentBinding;
 import com.brankomikusic.conversation_salons_app_v2_1.room_sqlite.Article;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.Query;
 
 /**

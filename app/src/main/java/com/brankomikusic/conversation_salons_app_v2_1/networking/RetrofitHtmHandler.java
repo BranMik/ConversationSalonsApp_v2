@@ -1,22 +1,18 @@
 package com.brankomikusic.conversation_salons_app_v2_1.networking;
 
 import android.util.Log;
-
 import com.brankomikusic.conversation_salons_app_v2_1.MainActivity;
 import com.brankomikusic.conversation_salons_app_v2_1.backgroundtasks.UpdateArticlesInDbFromBlog;
 import com.brankomikusic.conversation_salons_app_v2_1.room_sqlite.Article;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
 import okhttp3.HttpUrl;

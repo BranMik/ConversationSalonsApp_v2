@@ -2,12 +2,10 @@ package com.brankomikusic.conversation_salons_app_v2_1.backgroundtasks;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.brankomikusic.conversation_salons_app_v2_1.MainActivity;
 import com.brankomikusic.conversation_salons_app_v2_1.networking.RetrofitHtmHandler;
 import com.brankomikusic.conversation_salons_app_v2_1.room_sqlite.Article;
 import com.brankomikusic.conversation_salons_app_v2_1.room_sqlite.ArticlesDatabase;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

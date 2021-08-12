@@ -3,7 +3,6 @@ package com.brankomikusic.conversation_salons_app_v2_1;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;

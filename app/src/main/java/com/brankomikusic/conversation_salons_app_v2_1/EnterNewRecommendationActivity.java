@@ -1,30 +1,19 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import com.google.android.material.textfield.TextInputLayout;
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.ActivityEnterNewRecommendationBinding;
 
 public class EnterNewRecommendationActivity extends AppCompatActivity {
 
-    private EditText et;
-    private TextInputLayout et_layout;
-    private ConstraintLayout root;
+    private ActivityEnterNewRecommendationBinding viewBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enter_new_recommendation);
-
-        et = findViewById(R.id.enterrecommendation_et_text);
-        et_layout = findViewById(R.id.enterrecommendation_etlayout);
-        root = findViewById(R.id.enterrecommendation_root);
-
+        viewBinding = ActivityEnterNewRecommendationBinding.inflate(getLayoutInflater());
+        setContentView(viewBinding.getRoot());
         setListeners();
     }
 
@@ -33,18 +22,15 @@ public class EnterNewRecommendationActivity extends AppCompatActivity {
      */
     private void setListeners(){
 
-        ImageView iv_confirm = findViewById(R.id.enterrecommendation_b_confirmrecommendation);
-        ImageView iv_cancel = findViewById(R.id.enterrecommendation_b_cancelrecommendation);
-
-        iv_confirm.setOnClickListener((c)-> {
-            if (et.getText() != null && et.getText().length() > 0){
-                FirebaseHandler.createRecommendationInFirestore(this, et.getText().toString());
+        viewBinding.enterrecommendationBConfirmrecommendation.setOnClickListener((c)-> {
+            if (viewBinding.enterrecommendationEtText.getText().length() > 0){
+                FirebaseHandler.createRecommendationInFirestore(this, viewBinding.enterrecommendationEtText.getText().toString());
                 finish();
             }else{
                 Toast.makeText(this,getText(R.string.no_empty_field),Toast.LENGTH_LONG).show();
             }
         });
-        iv_cancel.setOnClickListener((c)->{
+        viewBinding.enterrecommendationBCancelrecommendation.setOnClickListener((c)->{
             finish();
         });
     }
@@ -55,8 +41,8 @@ public class EnterNewRecommendationActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        et.setText("");
-        et_layout.requestFocus();
+        viewBinding.enterrecommendationEtText.setText("");
+        viewBinding.enterrecommendationEtlayout.requestFocus();
     }
 
 }

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentRecommendationsListBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.Query;
@@ -41,21 +42,20 @@ public class RecommendationsFragment extends Fragment {
      */
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_recommendations_list, container, false);
+        FragmentRecommendationsListBinding viewBinding = FragmentRecommendationsListBinding.inflate(inflater, container, false);
         context = getContext();
-        setupFirestoreRecyclerView(root);
-        setupListeners(root);
-        return root;
+        setupFirestoreRecyclerView(viewBinding);
+        setupListeners(viewBinding);
+        return viewBinding.getRoot();
     }
 
     /**
      * Sets up listener on a Floating action button
      *
-     * @param root root View reference
+     * @param viewBinding View binder reference
      */
-    private void setupListeners(View root){
-        FloatingActionButton fabNewRecommendation = root.findViewById(R.id.fab_newRecommendation);
-        fabNewRecommendation.setOnClickListener((view)->{
+    private void setupListeners(FragmentRecommendationsListBinding viewBinding){
+        viewBinding.fabNewRecommendation.setOnClickListener((view)->{
             Intent newRecommendationIntent = new Intent(context, EnterNewRecommendationActivity.class);
             startActivity(newRecommendationIntent);
         });
@@ -63,17 +63,16 @@ public class RecommendationsFragment extends Fragment {
     /**
      * Sets up RecyclerView with FirestoreRecyclerAdapter.
      */
-    private void setupFirestoreRecyclerView(View root){
+    private void setupFirestoreRecyclerView(FragmentRecommendationsListBinding viewBinding){
         Query query = FirebaseHandler.getRecommendationsCollectionReference().orderBy("creationTime", Query.Direction.DESCENDING);
 
         FirestoreRecyclerOptions<RecommendationObject> options = new FirestoreRecyclerOptions.Builder<RecommendationObject>()
                 .setQuery(query, RecommendationObject.class)
                 .build();
         recommendationsViewAdapter = new RecommendationsViewAdapter(options,getContext(), R.layout.rv_recommendation_item, false);
-        RecyclerView rvRecommendationsList = root.findViewById(R.id.recommendations_list_rv);
-        rvRecommendationsList.setHasFixedSize(true);
-        rvRecommendationsList.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvRecommendationsList.setAdapter(recommendationsViewAdapter);
+        viewBinding.recommendationsListRv.setHasFixedSize(true);
+        viewBinding.recommendationsListRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        viewBinding.recommendationsListRv.setAdapter(recommendationsViewAdapter);
     }
 
     /**

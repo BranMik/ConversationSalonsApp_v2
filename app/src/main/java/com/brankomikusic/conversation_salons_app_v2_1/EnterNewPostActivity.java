@@ -1,14 +1,11 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputLayout;
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.ActivityEnterNewPostBinding;
 
 /**
  * Activity class for posting new post/comment on a particular conversation.
@@ -17,9 +14,7 @@ import com.google.android.material.textfield.TextInputLayout;
  */
 public class EnterNewPostActivity extends AppCompatActivity {
 
-    private EditText et;
-    private TextInputLayout et_layout;
-    private ConstraintLayout root;
+    private ActivityEnterNewPostBinding viewBinding;
 
     /**
      * Views handlers are fetched as well as Bundle object with data sent from calling fragment through
@@ -29,22 +24,22 @@ public class EnterNewPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enter_new_post);
-        et = findViewById(R.id.enterpost_et_text);
-        root = findViewById(R.id.frame_et_enterpost);
-        et_layout = findViewById(R.id.enterpost_etlayout);
-        ImageView iv_confirm = findViewById(R.id.enterpost_b_confirmpost);
-        ImageView iv_cancel = findViewById(R.id.enterpost_b_cancelpost);
+        viewBinding = ActivityEnterNewPostBinding.inflate(getLayoutInflater());
+        setContentView(viewBinding.getRoot());
 
         Intent intent = getIntent();
         Bundle newPostBundle = intent.getBundleExtra(ConversationsViewAdapter.INTENT_EXTRA_KEY_BUNDLE);
         String documentId = newPostBundle.getString(ConversationsViewAdapter.BUNDLE_KEY_CONVERSATION_DOCUMENTID);
 
-        iv_confirm.setOnClickListener((view)->{
-            FirebaseHandler.createPostInFirestore(this,et.getText().toString(),documentId);
-            finish();
+        viewBinding.enterpostBConfirmpost.setOnClickListener((view)-> {
+            if (viewBinding.enterpostEtText.getText().length() > 0){
+                FirebaseHandler.createPostInFirestore(this, viewBinding.enterpostEtText.getText().toString(), documentId);
+                finish();
+            }else{
+                Toast.makeText(this,getText(R.string.no_empty_field),Toast.LENGTH_LONG).show();
+            }
         });
-        iv_cancel.setOnClickListener((view)->{
+        viewBinding.enterpostBCancelpost.setOnClickListener((view)->{
             finish();
         });
 
@@ -56,7 +51,7 @@ public class EnterNewPostActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        et.setText("");
-        et_layout.requestFocus();
+        viewBinding.enterpostEtText.setText("");
+        viewBinding.enterpostEtlayout.requestFocus();
     }
 }

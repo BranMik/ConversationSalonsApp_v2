@@ -1,14 +1,9 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.google.android.material.textfield.TextInputLayout;
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.ActivityEnterNewConversationBinding;
 
 /**
  * Activity class for posting new conversation topics.
@@ -17,10 +12,7 @@ import com.google.android.material.textfield.TextInputLayout;
  */
 public class EnterNewConversationActivity extends AppCompatActivity {
 
-    private EditText et_title;
-    private EditText et_intro;
-    private TextInputLayout etlayout_intro;
-    private ConstraintLayout root;
+    ActivityEnterNewConversationBinding viewBinding;
 
     /**
      * Views handlers are fetched and onClick listeners are created.
@@ -30,26 +22,19 @@ public class EnterNewConversationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enter_new_conversation);
+        viewBinding = ActivityEnterNewConversationBinding.inflate(getLayoutInflater());
+        setContentView(viewBinding.getRoot());
 
-        et_intro = findViewById(R.id.enterconversation_et_intro);
-        et_title = findViewById(R.id.enterconversation_et_title);
-        etlayout_intro = findViewById(R.id.enterconversation_etlayout_intro);
-        ImageView iv_confirm = findViewById(R.id.enterconversation_b_confirm);
-        ImageView iv_cancel = findViewById(R.id.enterconversation_b_cancel);
-        root = findViewById(R.id.enterconversation_root);
-
-        iv_confirm.setOnClickListener((view)->{
-            if(et_title.getText() != null && et_title.getText().toString().length()>0 &&
-            et_intro.getText() != null && et_intro.getText().toString().length()>0){
-                FirebaseHandler.createConversationInFirestore(this, et_title.getText().toString(), et_intro.getText().toString());
+        viewBinding.enterconversationBConfirm.setOnClickListener((view)->{
+            if(viewBinding.enterconversationEtTitle.getText().toString().length()>0 && viewBinding.enterconversationEtIntro.getText().toString().length()>0){
+                FirebaseHandler.createConversationInFirestore(this, viewBinding.enterconversationEtTitle.getText().toString(), viewBinding.enterconversationEtIntro.getText().toString());
                 finish();
             }else{
                 Toast.makeText(this,getText(R.string.no_empty_fields),Toast.LENGTH_LONG).show();
             }
         });
 
-        iv_cancel.setOnClickListener((view)->{
+        viewBinding.enterconversationBCancel.setOnClickListener((view)->{
             finish();
         });
     }
@@ -60,8 +45,8 @@ public class EnterNewConversationActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        et_intro.setText("");
-        et_title.setText("");
-        etlayout_intro.requestFocus();
+        viewBinding.enterconversationEtIntro.setText("");
+        viewBinding.enterconversationEtTitle.setText("");
+        viewBinding.enterconversationEtlayoutIntro.requestFocus();
     }
 }

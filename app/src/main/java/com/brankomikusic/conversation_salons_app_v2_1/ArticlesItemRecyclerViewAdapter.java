@@ -3,7 +3,6 @@ package com.brankomikusic.conversation_salons_app_v2_1;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.brankomikusic.conversation_salons_app_v2_1.room_sqlite.Article;
-
 import java.util.List;
 import java.util.Random;
 

@@ -1,15 +1,12 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ScrollView;
-import android.widget.TextView;
+
+import com.brankomikusic.conversation_salons_app_v2_1.databinding.ActivityArticleDetailBinding;
 
 /**
  * Activity that is responsible  for showing the content of an article that was chosen from the list
@@ -29,27 +26,23 @@ public class ArticleDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article_detail);
-        Toolbar toolbar = findViewById(R.id.toolbar_article_detail);
-        setSupportActionBar(toolbar);
+        ActivityArticleDetailBinding activityArticleDetailBinding = ActivityArticleDetailBinding.inflate(getLayoutInflater());
+
+        setContentView(activityArticleDetailBinding.getRoot());
+
+        setSupportActionBar(activityArticleDetailBinding.toolbarArticleDetail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //show back button
 
 
         Intent intent = getIntent();
         Bundle articleBundle = intent.getBundleExtra(ArticlesItemRecyclerViewAdapter.INTENT_EXTRA_KEY_BUNDLE);
-        ImageView imageView = findViewById(R.id.article_detail_imgv_image);
-        TextView tv_title = findViewById(R.id.article_detail_tv_title);
-        TextView tv_author = findViewById(R.id.article_detail_tv_author);
-        TextView tv_content = findViewById(R.id.article_detail_tv_content);
-        TextView tv_date = findViewById(R.id.article_detail_tv_date);
-        ScrollView scr_view = findViewById(R.id.article_detail_scrv_content);
 
-        tv_title.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_TITLE,""));
-        tv_author.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_AUTHOR,""));
-        tv_content.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_CONTENT,""));
-        tv_date.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_DATE,""));
-        MyUtils.showImageFromUri(this,articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_IMGPATH,""),imageView);
-        scr_view.fullScroll(View.FOCUS_UP);
+        activityArticleDetailBinding.articleDetailTvTitle.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_TITLE,""));
+        activityArticleDetailBinding.articleDetailTvAuthor.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_AUTHOR,""));
+        activityArticleDetailBinding.articleDetailTvContent.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_CONTENT,""));
+        activityArticleDetailBinding.articleDetailTvDate.setText(articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_DATE,""));
+        MyUtils.showImageFromUri(this,articleBundle.getString(ArticlesItemRecyclerViewAdapter.BUNDLE_KEY_IMGPATH,""),activityArticleDetailBinding.articleDetailImgvImage);
+        activityArticleDetailBinding.articleDetailScrvContent.fullScroll(View.FOCUS_UP);
 
     }
 
