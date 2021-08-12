@@ -118,4 +118,8 @@
     <string name="tb_is_member_blocked">IsMemberBlocked</string>
     <string name="toast_member_blocked_success">Member blocked status changed in database.</string>
     <string name="toast_member_blocked_fail">Changing member blocked status was not succesfull.</string>
+    <string name="email_us">email us</string>
+    <string name="business_email_address">"bmikusic@gmail.com"</string>
+    <!-- TODO Change email into conversation.salons@gmail.com-->
+    <string name="email_us_subject">"Email from the Conversation Salons App user"</string>
 </resources>

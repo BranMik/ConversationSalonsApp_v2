@@ -54,6 +54,18 @@ public class UserSettingsActivity extends AppCompatActivity {
      */
     private void setupListeners(){
 
+        activityUserSettingsBinding.settingsBEmail.setOnClickListener((view)->{
+            String[] addresses= {getString(R.string.business_email_address)};
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+            intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_us_subject));
+
+            if (intent.resolveActivity(view.getContext().getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        });
+
         activityUserSettingsBinding.tvSettingsUserFullName.setOnClickListener((view)->{
             activityUserSettingsBinding.etSettingsUserFullName.setVisibility(View.VISIBLE);
             activityUserSettingsBinding.etSettingsUserFullName.setText(activityUserSettingsBinding.tvSettingsUserFullName.getText());

@@ -192,4 +192,19 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_settings_userFullName"
         app:layout_constraintStart_toStartOf="@+id/tv_settings_userFullName"
         app:layout_constraintTop_toTopOf="@+id/tv_settings_userFullName" />
+
+    <Button
+        android:id="@+id/settings_b_email"
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:backgroundTint="@color/brand_color_1_secondary"
+        android:drawableBottom="@android:drawable/sym_action_email"
+        android:padding="@dimen/card_margin"
+        android:text="@string/email_us"
+        android:textColor="@color/grey_100"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/b_members_administrate"
+        app:layout_constraintTop_toBottomOf="@+id/b_members_administrate" />
 </androidx.constraintlayout.widget.ConstraintLayout>
