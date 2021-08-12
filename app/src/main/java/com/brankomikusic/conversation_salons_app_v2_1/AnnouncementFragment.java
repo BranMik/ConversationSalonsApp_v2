@@ -1,24 +1,35 @@
 package com.brankomikusic.conversation_salons_app_v2_1;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.brankomikusic.conversation_salons_app_v2_1.databinding.FragmentAnnouncementBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.sql.Time;
+import java.util.UUID;
+
+import static android.app.Activity.RESULT_OK;
 
 public class AnnouncementFragment extends Fragment {
     private FragmentAnnouncementBinding fragmentAnnouncementBinding;
@@ -26,6 +37,7 @@ public class AnnouncementFragment extends Fragment {
     public static final String KEY_EXTRA_ANNOUNCEMENT_TITLE = "announcement_extra_title";
     public static final String KEY_EXTRA_ANNOUNCEMENT_TEXT = "announcement_extra_text";
     public static final String KEY_EXTRA_ANNOUNCEMENT_DATE = "announcement_extra_date";
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -68,6 +80,8 @@ public class AnnouncementFragment extends Fragment {
             fragmentAnnouncementBinding.announcementFabNewAnnouncement.setVisibility(View.INVISIBLE);
         }
     }
+
+
 
     @Override
     public void onResume() {

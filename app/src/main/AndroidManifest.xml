@@ -20,6 +20,8 @@
         <activity android:name="com.brankomikusic.conversation_salons_app_v2_1.EnterNewConversationActivity"/>
         <activity android:name="com.brankomikusic.conversation_salons_app_v2_1.EnterNewRecommendationActivity" />
         <activity android:name="com.brankomikusic.conversation_salons_app_v2_1.EnterNewPostActivity" />
+        <activity android:name="com.brankomikusic.conversation_salons_app_v2_1.AdministrateMembersActivity"
+            android:label="Members" />
         <activity
             android:name="com.brankomikusic.conversation_salons_app_v2_1.ConversationDetailActivity"
             android:label="" />

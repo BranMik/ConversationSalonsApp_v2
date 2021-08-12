@@ -143,6 +143,8 @@ public abstract class FirebaseHandler {
         return conversationsCollectionReference;
     }
 
+
+
     /**
      * Getter for announcements CollectionReference.
      * @return announcements CollectionReference
@@ -209,6 +211,17 @@ public abstract class FirebaseHandler {
                 });
     }
 
+    public static void changeIsMemberBlockedStatus(Context context, String memberId, Boolean isBlocked){
+        Log.d(MainActivity.LOG_BR_INFO,memberId+" new state = "+isBlocked);
+        getMembersCollectionReference().document(memberId).update("isBlocked", isBlocked)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(context, context.getText(R.string.toast_member_blocked_success), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(context, context.getText(R.string.toast_member_blocked_fail), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
     /**
      * Method to create new member entry/document in Firestore database.
      *

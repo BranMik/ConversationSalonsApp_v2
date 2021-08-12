@@ -149,12 +149,9 @@ public class UserSettingsActivity extends AppCompatActivity {
             }
         });
 
-        activityUserSettingsBinding.swAdminMode.setOnCheckedChangeListener((view,state)->{
-            if(state){
-                UserObject.getUserObjectInstance().setIsAdmin(true);
-            }else{
-                UserObject.getUserObjectInstance().setIsAdmin(false);
-            }
+        activityUserSettingsBinding.bMembersAdministrate.setOnClickListener((view)->{
+            Intent intent_administrateMembers = new Intent(this, AdministrateMembersActivity.class);
+            startActivity(intent_administrateMembers);
         });
     }
 
@@ -166,8 +163,8 @@ public class UserSettingsActivity extends AppCompatActivity {
                 activityUserSettingsBinding.tvSettingsUserFullName.setText(UserObject.getUserObjectInstance().getFullName());
         if(UserObject.getUserObjectInstance().getEmail() != null && UserObject.getUserObjectInstance().getEmail().length()>1)
             activityUserSettingsBinding.tvUseremailSettings.setText(UserObject.getUserObjectInstance().getEmail());
-        if(UserObject.getUserObjectInstance().getIsAdmin() != null)
-            activityUserSettingsBinding.swAdminMode.setChecked(UserObject.getUserObjectInstance().getIsAdmin());
+        if(UserObject.getUserObjectInstance().getIsAdmin())
+            activityUserSettingsBinding.bMembersAdministrate.setVisibility(View.VISIBLE);
         MyUtils.showImageFromCloudStorage(this,UserObject.getUserObjectInstance().getProfileImageLocationInCloudStorage(),
                 activityUserSettingsBinding.imgvSettingsProfilePic, FirebaseHandler.getProfileImagesStorageReference(), R.drawable.profile_image_placeholder, true);
     }
@@ -214,19 +211,12 @@ public class UserSettingsActivity extends AppCompatActivity {
      * @param data data from returning intent result
      */
     @Override
-    protected void onActivityResult(int requestCode,
-                                    int resultCode,
-                                    Intent data)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
 
-        super.onActivityResult(requestCode,
-                resultCode,
-                data);
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST
-                && resultCode == RESULT_OK
-                && data != null
-                && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
             // Get the Uri of data
             uploadProfileImageToCloudStorage(data.getData());

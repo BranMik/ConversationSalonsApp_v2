@@ -17,6 +17,7 @@ import java.util.HashSet;
 public class UserObject {
     private static UserObject userObjectInstance = null;
 
+    public static final String FIELD_BLOCKED = "isBlocked";
     public static final String FIELD_UID = "userUID";
     public static final String FIELD_EMAIL = "email";
     public static final String FIELD_FULL_NAME = "fullName";
@@ -29,6 +30,7 @@ public class UserObject {
     public static final String SHPREFS_KEY_UID = "user_uid";
     public static final String SHPREFS_KEY_IMAGE_IN_CLOUD_STORAGE = "user_image_in_cloud_storage";
     public static final String SHPREFS_KEY_IS_ADMIN = "user_is_admin";
+    public static final String SHPREFS_KEY_IS_BLOCKED = "user_is_blocked";
     public static final String SHPREFS_KEY_IS_CONFIRMED = "user_is_confirmed";
 
     // Fields holding book data.
@@ -38,6 +40,7 @@ public class UserObject {
     private String profileImageLocationInCloudStorage;
     private Boolean isMembershipConfirmed;
     private Boolean isAdmin;
+    private Boolean isBlocked;
 
     private String userDocumentId_InMembersCollection;
 
@@ -59,6 +62,7 @@ public class UserObject {
         this.fullName = user.getDisplayName();
         this.isMembershipConfirmed = false;
         this.isAdmin = false;
+        this.isBlocked = false;
         this.profileImageLocationInCloudStorage = null;
     }
 
@@ -70,6 +74,7 @@ public class UserObject {
     public UserObject(DocumentSnapshot documentSnapshot){
         this.userUID = (String)documentSnapshot.get(FIELD_UID);
         this.isAdmin = (Boolean)documentSnapshot.get(FIELD_IS_ADMIN);
+        this.isBlocked = (Boolean)documentSnapshot.get(FIELD_BLOCKED);
         this.isMembershipConfirmed = (Boolean)documentSnapshot.get(FIELD_IS_MEMBERSHIP_CONFIRMED);
         this.fullName = (String)documentSnapshot.get(FIELD_FULL_NAME);
         this.email = (String)documentSnapshot.get(FIELD_EMAIL);
@@ -105,6 +110,10 @@ public class UserObject {
     
     public Boolean getIsAdmin(){ return isAdmin; }
 
+    public Boolean getIsBlocked(){
+        return this.isBlocked;
+    }
+
     /**
      * If user instance does not exist new is created then returned, if it does exist that one
      * is returned
@@ -138,6 +147,10 @@ public class UserObject {
 
     public void setIsAdmin(boolean isAdmin){
         this.isAdmin = isAdmin;
+    }
+
+    public void setIsBlocked(boolean isBlocked){
+        this.isBlocked = isBlocked;
     }
 
     public static void changeUserFullNameInFirestore(Context context, String newName){
@@ -193,6 +206,7 @@ public class UserObject {
         userObject.setUserUID(shpref.getString(UserObject.SHPREFS_KEY_UID,""));
         userObject.setIsMembershipConfirmed(shpref.getBoolean(UserObject.SHPREFS_KEY_IS_CONFIRMED,false));
         userObject.setIsAdmin(shpref.getBoolean(UserObject.SHPREFS_KEY_IS_ADMIN,false));
+        userObject.setIsBlocked(shpref.getBoolean(UserObject.SHPREFS_KEY_IS_BLOCKED,false));
 
         return userObject;
     }
@@ -209,6 +223,7 @@ public class UserObject {
         editor.putString(UserObject.SHPREFS_KEY_UID, userObject.userUID);
         editor.putBoolean(UserObject.SHPREFS_KEY_IS_ADMIN, userObject.isAdmin);
         editor.putBoolean(UserObject.SHPREFS_KEY_IS_CONFIRMED, userObject.isMembershipConfirmed);
+        editor.putBoolean(UserObject.SHPREFS_KEY_IS_BLOCKED, userObject.isBlocked);
         editor.apply();
     }
 

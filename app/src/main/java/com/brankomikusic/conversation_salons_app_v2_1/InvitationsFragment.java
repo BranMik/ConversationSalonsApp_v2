@@ -3,6 +3,7 @@ package com.brankomikusic.conversation_salons_app_v2_1;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class InvitationsFragment extends Fragment {
         FirestoreRecyclerOptions<InvitationObject> options = new FirestoreRecyclerOptions.Builder<InvitationObject>()
                 .setQuery(query, InvitationObject.class)
                 .build();
+        Log.d(MainActivity.LOG_BR_INFO,"Invitations size of query : " + String.valueOf(options.getSnapshots().size()));
         invitationsViewAdapter = new InvitationsViewAdapter(options,getContext(), R.layout.rv_invitation_item, false);
         RecyclerView rvInvitationList = root.findViewById(R.id.invitations_list_rv);
         rvInvitationList.setHasFixedSize(true);

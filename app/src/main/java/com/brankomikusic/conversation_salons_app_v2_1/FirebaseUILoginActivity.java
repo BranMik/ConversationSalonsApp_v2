@@ -102,8 +102,8 @@ public class FirebaseUILoginActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             Log.d(MainActivity.LOG_BR_INFO,"requestCode == RC_SIGN_IN");
             if (resultCode == Activity.RESULT_OK) {
-                Log.d(MainActivity.LOG_BR_INFO,"resultCode == OK");
                 // Sign in succeeded
+                Log.d(MainActivity.LOG_BR_INFO,"resultCode == OK");
                 updateUI(FirebaseHandler.getFirebaseAuthInstance().getCurrentUser());
             } else {
                 // Sign in failed
@@ -144,14 +144,18 @@ public class FirebaseUILoginActivity extends AppCompatActivity {
                             Log.d(MainActivity.LOG_BR_INFO,String.valueOf(user.isEmailVerified()));
                             if(user.isEmailVerified()) {
                                 Log.d(MainActivity.LOG_BR_INFO,"email is verified");
-                                UserObject.createUserObjectInstanceForExistingMember(task.getResult().getDocuments().get(0));
-                                MyUtils.showAlertMessage(FirebaseUILoginActivity.this, getString(R.string.message_signed_in, user.getEmail(), task.getResult().getDocuments().get(0).get(UserObject.FIELD_FULL_NAME))
-                                        , MyUtils.AlertType.POSITIVE, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                startMainApplicationUI();
-                                            }
-                                        });
+                                if(!((Boolean)task.getResult().getDocuments().get(0).get(UserObject.FIELD_BLOCKED))) {
+                                    UserObject.createUserObjectInstanceForExistingMember(task.getResult().getDocuments().get(0));
+                                    MyUtils.showAlertMessage(FirebaseUILoginActivity.this, getString(R.string.message_signed_in, user.getEmail(), task.getResult().getDocuments().get(0).get(UserObject.FIELD_FULL_NAME))
+                                            , MyUtils.AlertType.POSITIVE, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    startMainApplicationUI();
+                                                }
+                                            });
+                                }else{
+                                    finish();
+                                }
                             }else{
                                 Log.d(MainActivity.LOG_BR_INFO,"email is not verified");
                                 MyUtils.showAlertMessage(FirebaseUILoginActivity.this, getString(R.string.message_email_not_verified),
